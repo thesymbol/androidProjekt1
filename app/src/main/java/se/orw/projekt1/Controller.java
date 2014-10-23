@@ -14,8 +14,6 @@ import se.orw.projekt1.Twitter.TwitterFunctions;
  * Created by Marcus on 2014-10-22.
  */
 public class Controller {
-    private static final String CONSUMER_KEY = "";
-    private static final String CONSUMER_SECRET = "";
     private Activity activity;
     private TestFragment testFragment;
     private TwitterFragment twitterFragment;
@@ -39,7 +37,7 @@ public class Controller {
     public void twitterDisconnect() {
         Log.d("se.orw.projekt1.Controller", "before logOutOfTwitter isConnected: " + TwitterController.isConnected(activity));
         //send test tweet
-        TwitterFunctions.postToTwitter(activity, activity, CONSUMER_KEY, CONSUMER_SECRET, "Test tweet", new TwitterFunctions.TwitterPostResponse() {
+        TwitterFunctions.postToTwitter(activity, activity, Secrets.CONSUMER_KEY, Secrets.CONSUMER_SECRET, "Test tweet", new TwitterFunctions.TwitterPostResponse() {
             @Override
             public void OnResult(Boolean success) {
                 Log.d(Constants.TAG + ".Controller.TwitterPostResponse", "Success: " + success);
@@ -66,13 +64,5 @@ public class Controller {
             transaction.replace(R.id.activity_main, fragment);
         }
         transaction.commit();
-    }
-
-    public String getConsumerKey() {
-        return CONSUMER_KEY;
-    }
-
-    public String getConsumerSecret() {
-        return CONSUMER_SECRET;
     }
 }

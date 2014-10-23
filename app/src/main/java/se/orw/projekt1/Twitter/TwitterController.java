@@ -12,9 +12,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import se.orw.projekt1.*;
 import se.orw.projekt1.Constants;
-import se.orw.projekt1.Controller;
-import se.orw.projekt1.R;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
@@ -26,29 +25,22 @@ import twitter4j.conf.ConfigurationBuilder;
  * Created by Marcus on 2014-10-23.
  */
 public class TwitterController {
-    // server configuration
-    private static final int TWITTER_LOGIN_RESULT_CODE_SUCCESS = 1;
-    private static final int TWITTER_LOGIN_RESULT_CODE_FAILURE = 2;
-
+    private static Twitter twitter;
+    private static RequestToken requestToken;
     private WebView twitterLoginWebView;
     private ProgressDialog mProgressDialog;
     private String twitterConsumerKey;
     private String twitterConsumerSecret;
-
-    private static Twitter twitter;
-    private static RequestToken requestToken;
-    private View fragmentView;
     private Fragment fragment;
     private Controller controller;
 
     public TwitterController(final View fragmentView, Fragment fragment, Controller controller) {
-        this.fragmentView = fragmentView;
         this.fragment = fragment;
         this.controller = controller;
 
-        twitterConsumerKey = controller.getConsumerKey();
-        twitterConsumerSecret = controller.getConsumerSecret();
-        if (twitterConsumerKey == null || twitterConsumerSecret == null) {
+        twitterConsumerKey = Secrets.CONSUMER_KEY;
+        twitterConsumerSecret = Secrets.CONSUMER_SECRET;
+        if (twitterConsumerKey.length() <= 0 || twitterConsumerSecret.length() <= 0) {
             Log.e(Constants.TAG + ".TwitterActivity.TwitterController", "ERROR: Consumer Key and Consumer Secret required!");
             controller.switchToDefaultFragment();
         }
@@ -90,7 +82,7 @@ public class TwitterController {
         });
 
 
-        Log.d(Constants.TAG + ".TwitterActivity.TwitterController", "ASK OAUTH");
+        Log.d(se.orw.projekt1.Constants.TAG + ".TwitterActivity.TwitterController", "ASK OAUTH");
         askOAuth();
     }
 
@@ -165,7 +157,7 @@ public class TwitterController {
                         @Override
                         public void run() {
                             mProgressDialog.cancel();
-                            Toast.makeText(fragment.getActivity(), errorString.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(fragment.getActivity(), errorString, Toast.LENGTH_SHORT).show();
                             controller.switchToDefaultFragment();
                         }
                     });
