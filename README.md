@@ -1,5 +1,6 @@
-androidProjekt1
+Tweetranslate
 ===============
+Translate your tweet to another language before sending it.
 
 Edit Twitter Key/Secret
 -------------------------
