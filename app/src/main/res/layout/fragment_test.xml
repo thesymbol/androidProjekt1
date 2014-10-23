@@ -19,10 +19,4 @@
         android:text="Disconnect"
         android:id="@+id/btnDisconnect"/>
 
-    <WebView
-        android:id="@+id/twitter_login_web_view"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:layout_below="@id/btnDisconnect"/>
-
 </RelativeLayout>

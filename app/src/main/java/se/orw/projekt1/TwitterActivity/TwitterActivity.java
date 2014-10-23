@@ -1,26 +1,27 @@
-package se.orw.projekt1;
+package se.orw.projekt1.TwitterActivity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import se.orw.projekt1.R;
 
-public class MainActivity extends Activity {
-    private Controller controller;
+public class TwitterActivity extends Activity {
+    private TwitterController twitterController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        controller = new Controller(this);
+        setContentView(R.layout.activity_twitter);
+        twitterController = new TwitterController(this);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.twitter, menu);
         return true;
     }
 
@@ -34,5 +35,11 @@ public class MainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        twitterController.onDestroy();
     }
 }

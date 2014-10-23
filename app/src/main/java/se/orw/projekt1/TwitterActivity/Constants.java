@@ -1,11 +1,10 @@
-package se.orw.projekt1;
+package se.orw.projekt1.TwitterActivity;
 
 /**
  * Created by Marcus on 2014-10-23.
  */
 public class Constants {
-    public static final String CONSUMER_KEY = "DYkm3hP3Yfi9XY4QMjKeLjI6f";
-    public static final String CONSUMER_SECRET = "uDefXqUeClhOazvnr48owY3wOyBEnc0dwUbhoCykjol0yxq2CN";
+    public static final String TAG = "se.orw.projekt1.TwitterActivity";
 
     public static final String PREFERENCE_NAME = "twitter_oauth";
     public static final String PREF_KEY_SECRET = "oauth_token_secret";
