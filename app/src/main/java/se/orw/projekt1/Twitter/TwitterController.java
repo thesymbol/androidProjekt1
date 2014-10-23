@@ -12,8 +12,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-import se.orw.projekt1.*;
 import se.orw.projekt1.Constants;
+import se.orw.projekt1.Controller;
+import se.orw.projekt1.R;
+import se.orw.projekt1.Secrets;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 import twitter4j.auth.AccessToken;
@@ -82,7 +84,7 @@ public class TwitterController {
         });
 
 
-        Log.d(se.orw.projekt1.Constants.TAG + ".TwitterActivity.TwitterController", "ASK OAUTH");
+        Log.d(Constants.TAG + ".TwitterActivity.TwitterController", "ASK OAUTH");
         askOAuth();
     }
 
@@ -132,7 +134,8 @@ public class TwitterController {
                 } catch (Exception e) {
                     e.printStackTrace();
                     if (e.getMessage() != null) Log.e(Constants.TAG, e.getMessage());
-                    else Log.e(Constants.TAG + ".TwitterActivity.TwitterController", "ERROR: Twitter callback failed");
+                    else
+                        Log.e(Constants.TAG + ".TwitterActivity.TwitterController", "ERROR: Twitter callback failed");
                 }
                 controller.switchToDefaultFragment();
             }

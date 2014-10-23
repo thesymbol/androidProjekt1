@@ -11,7 +11,6 @@ import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
- *
  */
 public class TestFragment extends Fragment {
     private View view;
@@ -29,7 +28,7 @@ public class TestFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if(view == null) {
+        if (view == null) {
             view = inflater.inflate(R.layout.fragment_test, container, false);
         }
         init();

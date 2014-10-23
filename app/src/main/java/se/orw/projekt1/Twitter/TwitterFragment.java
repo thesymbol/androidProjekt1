@@ -12,7 +12,6 @@ import se.orw.projekt1.R;
 
 /**
  * A simple {@link Fragment} subclass.
- *
  */
 public class TwitterFragment extends Fragment {
     private View view;

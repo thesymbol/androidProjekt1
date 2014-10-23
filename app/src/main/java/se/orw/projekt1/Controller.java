@@ -53,12 +53,12 @@ public class Controller {
      * Switch to specified fragment
      *
      * @param fragment The fragment to switch to
-     * @param tag The tag for the fragment
+     * @param tag      The tag for the fragment
      */
     public void switchToFragment(Fragment fragment, String tag) {
         FragmentManager fragmentManager = activity.getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if(tag != null && tag.length() > 0) {
+        if (tag != null && tag.length() > 0) {
             transaction.replace(R.id.activity_main, fragment, tag);
         } else {
             transaction.replace(R.id.activity_main, fragment);
