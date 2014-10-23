@@ -2,17 +2,11 @@ package se.orw.projekt1;
 
 
 import android.app.Fragment;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
-
-import se.orw.projekt1.TwitterActivity.Constants;
 
 
 /**

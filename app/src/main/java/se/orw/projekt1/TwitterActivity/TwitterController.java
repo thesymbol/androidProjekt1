@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import se.orw.projekt1.Constants;
 import se.orw.projekt1.R;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
@@ -46,7 +47,7 @@ public class TwitterController {
         twitterConsumerKey = activity.getIntent().getStringExtra(TWITTER_CONSUMER_KEY);
         twitterConsumerSecret = activity.getIntent().getStringExtra(TWITTER_CONSUMER_SECRET);
         if (twitterConsumerKey == null || twitterConsumerSecret == null) {
-            Log.e(Constants.TAG, "ERROR: Consumer Key and Consumer Secret required!");
+            Log.e(Constants.TAG + ".TwitterActivity.TwitterController", "ERROR: Consumer Key and Consumer Secret required!");
             activity.setResult(TWITTER_LOGIN_RESULT_CODE_FAILURE);
             activity.finish();
         }
@@ -88,7 +89,7 @@ public class TwitterController {
         });
 
 
-        Log.d(Constants.TAG, "ASK OAUTH");
+        Log.d(Constants.TAG + ".TwitterActivity.TwitterController", "ASK OAUTH");
         askOAuth();
     }
 
@@ -135,12 +136,12 @@ public class TwitterController {
                     e.putString(Constants.PREF_KEY_TOKEN, accessToken.getToken());
                     e.putString(Constants.PREF_KEY_SECRET, accessToken.getTokenSecret());
                     e.commit();
-                    Log.d(Constants.TAG, "TWITTER LOGIN SUCCESS!!!");
+                    Log.d(Constants.TAG + ".TwitterActivity.TwitterController", "TWITTER LOGIN SUCCESS!!!");
                     activity.setResult(TWITTER_LOGIN_RESULT_CODE_SUCCESS);
                 } catch (Exception e) {
                     e.printStackTrace();
                     if (e.getMessage() != null) Log.e(Constants.TAG, e.getMessage());
-                    else Log.e(Constants.TAG, "ERROR: Twitter callback failed");
+                    else Log.e(Constants.TAG + ".TwitterActivity.TwitterController", "ERROR: Twitter callback failed");
                     activity.setResult(TWITTER_LOGIN_RESULT_CODE_FAILURE);
                 }
                 activity.finish();
@@ -177,7 +178,7 @@ public class TwitterController {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d(Constants.TAG, "LOADING AUTH URL");
+                        Log.d(Constants.TAG + ".TwitterActivity.TwitterController", "LOADING AUTH URL");
                         twitterLoginWebView.loadUrl(requestToken.getAuthenticationURL());
                     }
                 });

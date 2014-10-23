@@ -15,6 +15,8 @@ import se.orw.projekt1.TwitterActivity.TwitterFunctions;
  * Created by Marcus on 2014-10-22.
  */
 public class Controller {
+    private static final String CONSUMER_KEY = "DYkm3hP3Yfi9XY4QMjKeLjI6f";
+    private static final String CONSUMER_SECRET = "uDefXqUeClhOazvnr48owY3wOyBEnc0dwUbhoCykjol0yxq2CN";
     private Activity activity;
     private TestFragment testFragment;
 
@@ -29,18 +31,18 @@ public class Controller {
 
     public void twitterConnect() {
         Intent intent = new Intent(activity, TwitterActivity.class);
-        intent.putExtra("twitter_consumer_key", "DYkm3hP3Yfi9XY4QMjKeLjI6f");
-        intent.putExtra("twitter_consumer_secret", "uDefXqUeClhOazvnr48owY3wOyBEnc0dwUbhoCykjol0yxq2CN");
+        intent.putExtra("twitter_consumer_key", CONSUMER_KEY);
+        intent.putExtra("twitter_consumer_secret", CONSUMER_SECRET);
         activity.startActivity(intent);
     }
 
     public void twitterDisconnect() {
         Log.d("se.orw.projekt1.Controller", "before logOutOfTwitter isConnected: " + TwitterController.isConnected(activity));
         //send test tweet
-        TwitterFunctions.postToTwitter(activity, activity, "DYkm3hP3Yfi9XY4QMjKeLjI6f", "uDefXqUeClhOazvnr48owY3wOyBEnc0dwUbhoCykjol0yxq2CN", "Test tweet", new TwitterFunctions.TwitterPostResponse() {
+        TwitterFunctions.postToTwitter(activity, activity, CONSUMER_KEY, CONSUMER_SECRET, "Test tweet", new TwitterFunctions.TwitterPostResponse() {
             @Override
             public void OnResult(Boolean success) {
-                Log.d("se.orw.projekt1.Controller.TwitterPostResponse", "Success: " + success);
+                Log.d(Constants.TAG + ".Controller.TwitterPostResponse", "Success: " + success);
             }
         });
     }
