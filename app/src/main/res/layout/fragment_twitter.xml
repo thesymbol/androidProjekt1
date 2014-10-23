@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="se.orw.projekt1.TwitterActivity.TwitterActivity">
+    tools:context="se.orw.projekt1.Twitter.TwitterFragment">
 
     <WebView
         android:id="@+id/twitter_login_web_view"

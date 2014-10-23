@@ -1,4 +1,4 @@
-package se.orw.projekt1.TwitterActivity;
+package se.orw.projekt1.Twitter;
 
 import android.app.Activity;
 import android.content.Context;

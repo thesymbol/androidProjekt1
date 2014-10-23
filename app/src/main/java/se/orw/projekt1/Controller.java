@@ -4,21 +4,21 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.util.Log;
 
-import se.orw.projekt1.TwitterActivity.TwitterActivity;
-import se.orw.projekt1.TwitterActivity.TwitterController;
-import se.orw.projekt1.TwitterActivity.TwitterFunctions;
+import se.orw.projekt1.Twitter.TwitterController;
+import se.orw.projekt1.Twitter.TwitterFragment;
+import se.orw.projekt1.Twitter.TwitterFunctions;
 
 /**
  * Created by Marcus on 2014-10-22.
  */
 public class Controller {
-    private static final String CONSUMER_KEY = "DYkm3hP3Yfi9XY4QMjKeLjI6f";
-    private static final String CONSUMER_SECRET = "uDefXqUeClhOazvnr48owY3wOyBEnc0dwUbhoCykjol0yxq2CN";
+    private static final String CONSUMER_KEY = "";
+    private static final String CONSUMER_SECRET = "";
     private Activity activity;
     private TestFragment testFragment;
+    private TwitterFragment twitterFragment;
 
     public Controller(Activity activity) {
         this.activity = activity;
@@ -26,14 +26,14 @@ public class Controller {
         testFragment = new TestFragment();
         testFragment.setController(this);
 
-        switchToFragment(testFragment, "");
+        twitterFragment = new TwitterFragment();
+        twitterFragment.setController(this);
+
+        switchToFragment(testFragment, null);
     }
 
     public void twitterConnect() {
-        Intent intent = new Intent(activity, TwitterActivity.class);
-        intent.putExtra("twitter_consumer_key", CONSUMER_KEY);
-        intent.putExtra("twitter_consumer_secret", CONSUMER_SECRET);
-        activity.startActivity(intent);
+        switchToFragment(twitterFragment, null);
     }
 
     public void twitterDisconnect() {
@@ -47,6 +47,10 @@ public class Controller {
         });
     }
 
+    public void switchToDefaultFragment() {
+        switchToFragment(testFragment, null);
+    }
+
     /**
      * Switch to specified fragment
      *
@@ -56,11 +60,19 @@ public class Controller {
     public void switchToFragment(Fragment fragment, String tag) {
         FragmentManager fragmentManager = activity.getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        if(tag.equals("")) {
-            transaction.replace(R.id.activity_main, fragment);
-        } else {
+        if(tag != null && tag.length() > 0) {
             transaction.replace(R.id.activity_main, fragment, tag);
+        } else {
+            transaction.replace(R.id.activity_main, fragment);
         }
         transaction.commit();
+    }
+
+    public String getConsumerKey() {
+        return CONSUMER_KEY;
+    }
+
+    public String getConsumerSecret() {
+        return CONSUMER_SECRET;
     }
 }

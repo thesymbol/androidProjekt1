@@ -1,17 +1,19 @@
-package se.orw.projekt1.TwitterActivity;
+package se.orw.projekt1.Twitter;
 
-import android.app.Activity;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import se.orw.projekt1.Constants;
+import se.orw.projekt1.Controller;
 import se.orw.projekt1.R;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
@@ -28,9 +30,6 @@ public class TwitterController {
     private static final int TWITTER_LOGIN_RESULT_CODE_SUCCESS = 1;
     private static final int TWITTER_LOGIN_RESULT_CODE_FAILURE = 2;
 
-    private static final String TWITTER_CONSUMER_KEY = "twitter_consumer_key";
-    private static final String TWITTER_CONSUMER_SECRET = "twitter_consumer_secret";
-
     private WebView twitterLoginWebView;
     private ProgressDialog mProgressDialog;
     private String twitterConsumerKey;
@@ -38,27 +37,29 @@ public class TwitterController {
 
     private static Twitter twitter;
     private static RequestToken requestToken;
-    private Activity activity;
+    private View fragmentView;
+    private Fragment fragment;
+    private Controller controller;
 
-    public TwitterController(final Activity activity) {
-        this.activity = activity;
-        activity.setContentView(R.layout.activity_twitter);
+    public TwitterController(final View fragmentView, Fragment fragment, Controller controller) {
+        this.fragmentView = fragmentView;
+        this.fragment = fragment;
+        this.controller = controller;
 
-        twitterConsumerKey = activity.getIntent().getStringExtra(TWITTER_CONSUMER_KEY);
-        twitterConsumerSecret = activity.getIntent().getStringExtra(TWITTER_CONSUMER_SECRET);
+        twitterConsumerKey = controller.getConsumerKey();
+        twitterConsumerSecret = controller.getConsumerSecret();
         if (twitterConsumerKey == null || twitterConsumerSecret == null) {
             Log.e(Constants.TAG + ".TwitterActivity.TwitterController", "ERROR: Consumer Key and Consumer Secret required!");
-            activity.setResult(TWITTER_LOGIN_RESULT_CODE_FAILURE);
-            activity.finish();
+            controller.switchToDefaultFragment();
         }
 
-        mProgressDialog = new ProgressDialog(activity);
+        mProgressDialog = new ProgressDialog(fragment.getActivity());
         mProgressDialog.setMessage("Please wait...");
         mProgressDialog.setCancelable(false);
         mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.show();
 
-        twitterLoginWebView = (WebView) activity.findViewById(R.id.twitter_login_web_view);
+        twitterLoginWebView = (WebView) fragmentView.findViewById(R.id.twitter_login_web_view);
         twitterLoginWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -127,24 +128,21 @@ public class TwitterController {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                // TODO Auto-generated method stub
                 String verifier = uri.getQueryParameter(Constants.IEXTRA_OAUTH_VERIFIER);
                 try {
-                    SharedPreferences sharedPrefs = activity.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
+                    SharedPreferences sharedPrefs = fragment.getActivity().getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
                     AccessToken accessToken = twitter.getOAuthAccessToken(requestToken, verifier);
                     SharedPreferences.Editor e = sharedPrefs.edit();
                     e.putString(Constants.PREF_KEY_TOKEN, accessToken.getToken());
                     e.putString(Constants.PREF_KEY_SECRET, accessToken.getTokenSecret());
                     e.commit();
                     Log.d(Constants.TAG + ".TwitterActivity.TwitterController", "TWITTER LOGIN SUCCESS!!!");
-                    activity.setResult(TWITTER_LOGIN_RESULT_CODE_SUCCESS);
                 } catch (Exception e) {
                     e.printStackTrace();
                     if (e.getMessage() != null) Log.e(Constants.TAG, e.getMessage());
                     else Log.e(Constants.TAG + ".TwitterActivity.TwitterController", "ERROR: Twitter callback failed");
-                    activity.setResult(TWITTER_LOGIN_RESULT_CODE_FAILURE);
                 }
-                activity.finish();
+                controller.switchToDefaultFragment();
             }
         }).start();
     }
@@ -163,19 +161,19 @@ public class TwitterController {
                     requestToken = twitter.getOAuthRequestToken(Constants.TWITTER_CALLBACK_URL);
                 } catch (Exception e) {
                     final String errorString = e.toString();
-                    activity.runOnUiThread(new Runnable() {
+                    fragment.getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             mProgressDialog.cancel();
-                            Toast.makeText(activity, errorString.toString(), Toast.LENGTH_SHORT).show();
-                            activity.finish();
+                            Toast.makeText(fragment.getActivity(), errorString.toString(), Toast.LENGTH_SHORT).show();
+                            controller.switchToDefaultFragment();
                         }
                     });
                     e.printStackTrace();
                     return;
                 }
 
-                activity.runOnUiThread(new Runnable() {
+                fragment.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Log.d(Constants.TAG + ".TwitterActivity.TwitterController", "LOADING AUTH URL");

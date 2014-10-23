@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TwitterActivity.TwitterActivity"
+            android:name=".Twitter.TwitterActivity"
             android:label="@string/title_activity_twitter" >
         </activity>
     </application>
