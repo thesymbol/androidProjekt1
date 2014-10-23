@@ -1,45 +1,72 @@
 package se.orw.projekt1;
 
 import android.app.Activity;
-import android.util.Log;
-
-import twitter4j.Status;
-import twitter4j.StatusUpdate;
-import twitter4j.Twitter;
-import twitter4j.TwitterFactory;
-import twitter4j.auth.AccessToken;
-import twitter4j.auth.RequestToken;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.net.Uri;
 
 /**
  * Created by Marcus on 2014-10-22.
  */
 public class Controller {
     private Activity activity;
+    private TwitterController twitterController;
+    private TestFragment testFragment;
 
     public Controller(Activity activity) {
         this.activity = activity;
-        new Thread() {
-            public void run() {
-                try {
-                    String pin= "";
-                    Twitter twitter = TwitterFactory.getSingleton();
-                    twitter.setOAuthConsumer("CONSUMER_KEY", "CONSUMER_SECRET");
-                    RequestToken requestToken = twitter.getOAuthRequestToken();
-                    AccessToken accessToken = null;
-                    if(pin.length() > 0) {
-                        accessToken = twitter.getOAuthAccessToken(requestToken, pin);
-                    } else {
-                        accessToken = twitter.getOAuthAccessToken();
-                    }
-                    twitter.verifyCredentials().getId();
-                    //storeAccessToken(twitter.verifyCredentials().getId(), accessToken);
-                    Status status = twitter.updateStatus(new StatusUpdate("Test"));
-                    Log.d("TwitterDebug", "Successfully updated the status to [" + status.getText() + "].");
-                } catch(Exception e) {
-                    Log.d("TwitterDebug", "twitter could not get OAuth");
-                    e.printStackTrace();
-                }
-            }
-        };
+
+        testFragment = new TestFragment();
+        testFragment.setController(this);
+
+        twitterController = new TwitterController(this);
+
+        switchToFragment(testFragment, "");
+    }
+
+    public void twitterConnect() {
+        if(twitterController.isConnected()) {
+            twitterController.disconnectTwitter();
+        } else {
+            twitterController.askOAuth();
+        }
+    }
+
+    public void twitterDisconnect() {
+        twitterController.disconnectTwitter();
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void onResume() {
+        twitterController.onResume();
+    }
+
+    public void saveAccessTokenAndFinish(Uri uri) {
+        twitterController.saveAccessTokenAndFinish(uri);
+    }
+
+    public void loadUrl(String authenticationURL) {
+        testFragment.loadUrl(authenticationURL);
+    }
+
+    /**
+     * Switch to specified fragment
+     *
+     * @param fragment The fragment to switch to
+     * @param tag The tag for the fragment
+     */
+    public void switchToFragment(Fragment fragment, String tag) {
+        FragmentManager fragmentManager = activity.getFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if(tag.equals("")) {
+            transaction.replace(R.id.activity_main, fragment);
+        } else {
+            transaction.replace(R.id.activity_main, fragment, tag);
+        }
+        transaction.commit();
     }
 }
