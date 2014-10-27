@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Projekt 1</string>
+    <string name="action_settings">Inställningar</string>
+    <string name="connect">Anslut</string>
+    <string name="disconnect">Koppla från</string>
+    <string name="drawerOpen">Öppna låda</string>
+    <string name="drawerClose">Stäng lådar</string>
+</resources>

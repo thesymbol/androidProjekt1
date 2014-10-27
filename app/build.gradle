@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 20
+    compileSdkVersion 19
     buildToolsVersion "20.0.0"
 
     defaultConfig {
         applicationId "se.orw.projekt1"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 20
         versionCode 1
         versionName "1.0"
@@ -21,4 +21,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:support-v4:21.0.0'
+    compile 'com.android.support:support-v13:21.0.0'
 }
