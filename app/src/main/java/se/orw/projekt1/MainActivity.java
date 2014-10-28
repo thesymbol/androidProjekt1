@@ -1,9 +1,9 @@
 package se.orw.projekt1;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -11,7 +11,7 @@ import com.facebook.AppEventsLogger;
 import com.facebook.Session;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
     private Controller controller;
 
     @Override

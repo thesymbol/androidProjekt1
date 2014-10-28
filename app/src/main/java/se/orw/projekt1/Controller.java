@@ -1,11 +1,8 @@
 package se.orw.projekt1;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.MenuItem;
@@ -25,29 +22,40 @@ import se.orw.projekt1.Twitter.TwitterFunctions;
  */
 @SuppressWarnings("deprecation")
 public class Controller {
-    private Activity activity;
-    private TestFragment testFragment;
+    private FragmentActivity activity;
+    private MainFragment mainFragment;
+    private ConnectFragment connectFragment;
     private TwitterFragment twitterFragment;
 
     private ActionBarDrawerToggle drawerToggle;
     private DrawerLayout drawerLayout;
     private ListView drawerList;
 
-    public Controller(Activity activity) {
+    public Controller(FragmentActivity activity) {
         this.activity = activity;
 
-        testFragment = new TestFragment();
-        testFragment.setController(this);
+        mainFragment = new MainFragment();
+        //mainFragment.setController(this);
+
+        connectFragment = new ConnectFragment();
+        connectFragment.setController(this);
 
         twitterFragment = new TwitterFragment();
         twitterFragment.setController(this);
 
-        switchToFragment(testFragment, null);
+        switchToFragment(mainFragment, null);
         initNavigationDrawer();
     }
 
+    /**
+     * Connect to twitter
+     */
     public void twitterConnect() {
-        switchToFragment(twitterFragment, null);
+        if(TwitterController.isConnected(activity)) {
+            TwitterController.logOutOfTwitter(activity);
+        } else {
+            switchToFragment(twitterFragment, null);
+        }
     }
 
     public void twitterDisconnect() {
@@ -62,7 +70,7 @@ public class Controller {
     }
 
     public void switchToDefaultFragment() {
-        switchToFragment(testFragment, null);
+        switchToFragment(mainFragment, null);
     }
 
     /**
@@ -71,9 +79,9 @@ public class Controller {
      * @param fragment The fragment to switch to
      * @param tag      The tag for the fragment
      */
-    public void switchToFragment(Fragment fragment, String tag) {
-        FragmentManager fragmentManager = activity.getFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+    public void switchToFragment(android.support.v4.app.Fragment fragment, String tag) {
+        android.support.v4.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
         if (tag != null && tag.length() > 0) {
             transaction.replace(R.id.activity_main, fragment, tag);
         } else {
@@ -112,7 +120,7 @@ public class Controller {
      * Initialize the navigation drawer
      */
     private void initNavigationDrawer() {
-        String[] menu = {"List item 1", "List item 2"};
+        final String[] menu = {"Home", "Connect"};
         drawerLayout = (DrawerLayout) activity.findViewById(R.id.layout_drawer);
         drawerList = (ListView) activity.findViewById(R.id.left_drawer);
 
@@ -120,6 +128,9 @@ public class Controller {
         drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                if(menu[position].equals("Connect")) {
+                    switchToFragment(connectFragment, null);
+                }
 
                 drawerLayout.closeDrawers();
             }

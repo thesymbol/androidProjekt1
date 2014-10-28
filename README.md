@@ -12,3 +12,7 @@ Edit Twitter Key/Secret
 public static final String CONSUMER_KEY = "";
 public static final String CONSUMER_SECRET = "";
 ```
+* Next step is to open the strings.xml and edit the app_id to your facebook app_id:
+```xml
+<string name="app_id"></string>
+```

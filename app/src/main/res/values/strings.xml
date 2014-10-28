@@ -13,4 +13,6 @@
     <string name="Google">Google+</string>
     <string name="Translate">Translate</string>
     <string name="app_id">881591251851457</string>
+    <string name="loginWithTwitter">Login with Twitter</string>
+    <string name="logoutTwitter">Logout from Twitter</string>
 </resources>

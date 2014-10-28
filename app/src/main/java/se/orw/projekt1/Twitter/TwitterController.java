@@ -1,6 +1,5 @@
 package se.orw.projekt1.Twitter;
 
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -33,10 +32,17 @@ public class TwitterController {
     private ProgressDialog mProgressDialog;
     private String twitterConsumerKey;
     private String twitterConsumerSecret;
-    private Fragment fragment;
+    private android.support.v4.app.Fragment fragment;
     private Controller controller;
 
-    public TwitterController(final View fragmentView, Fragment fragment, Controller controller) {
+    /**
+     * Constructor to handle the Twitter Login
+     *
+     * @param fragmentView
+     * @param fragment
+     * @param controller
+     */
+    public TwitterController(final View fragmentView, android.support.v4.app.Fragment fragment, Controller controller) {
         this.fragment = fragment;
         this.controller = controller;
 
@@ -88,6 +94,9 @@ public class TwitterController {
         askOAuth();
     }
 
+    /**
+     * Destroy the dialog once we are done
+     */
     public void onDestroy() {
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
@@ -95,11 +104,23 @@ public class TwitterController {
     }
 
     //Helper methods
+
+    /**
+     * Check if we are connected to twitter
+     *
+     * @param ctx
+     * @return
+     */
     public static boolean isConnected(Context ctx) {
         SharedPreferences sharedPrefs = ctx.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
         return sharedPrefs.getString(Constants.PREF_KEY_TOKEN, null) != null;
     }
 
+    /**
+     * Logout of twitter
+     *
+     * @param ctx
+     */
     public static void logOutOfTwitter(Context ctx) {
         SharedPreferences sharedPrefs = ctx.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPrefs.edit();
@@ -108,16 +129,32 @@ public class TwitterController {
         editor.commit();
     }
 
+    /**
+     * Get the Access Token
+     *
+     * @param ctx
+     * @return
+     */
     public static String getAccessToken(Context ctx) {
         SharedPreferences sharedPrefs = ctx.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
         return sharedPrefs.getString(Constants.PREF_KEY_TOKEN, null);
     }
 
+    /**
+     * Get the Secret Access Token
+     *
+     * @param ctx
+     * @return
+     */
     public static String getAccessTokenSecret(Context ctx) {
         SharedPreferences sharedPrefs = ctx.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
         return sharedPrefs.getString(Constants.PREF_KEY_SECRET, null);
     }
 
+    /**
+     * Save the token received from the user
+     * @param uri
+     */
     private void saveAccessTokenAndFinish(final Uri uri) {
         new Thread(new Runnable() {
             @Override
@@ -142,6 +179,9 @@ public class TwitterController {
         }).start();
     }
 
+    /**
+     * Getting the OAuth key's etc
+     */
     private void askOAuth() {
         ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
         configurationBuilder.setOAuthConsumerKey(twitterConsumerKey);

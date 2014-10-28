@@ -11,4 +11,6 @@
     <string name ="Twitter">Twitter</string>
     <string name="Google">Google+</string>
     <string name ="Translate">Översätt</string>
+    <string name="loginWithTwitter">Logga in med Twitter</string>
+    <string name="logoutTwitter">Logga ut från Twitter</string>
 </resources>

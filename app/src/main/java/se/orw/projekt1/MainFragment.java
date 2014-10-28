@@ -15,7 +15,7 @@ import android.widget.TextView;
 /**
  *
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends android.support.v4.app.Fragment {
     private CheckBox cbFacebook, cbTwitter, cbGoogle;
     private EditText etTextBox;
     private TextView tvPhrase;
