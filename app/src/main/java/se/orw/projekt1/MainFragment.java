@@ -20,7 +20,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
     private EditText etTextBox;
     private TextView tvPhrase;
     private Controller controller;
-    private String test="";
+    private String test="hej";
 
     public MainFragment() {
         // Required empty public constructor
