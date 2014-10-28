@@ -25,18 +25,17 @@ public class TwitterFragment extends android.support.v4.app.Fragment {
     /**
      * Sets the controller
      *
-     * @param controller
+     * @param controller The controller
      */
     public void setController(Controller controller) {
         this.controller = controller;
     }
 
     /**
-     *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater -
+     * @param container -
+     * @param savedInstanceState -
+     * @return -
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,7 +45,7 @@ public class TwitterFragment extends android.support.v4.app.Fragment {
     }
 
     /**
-     *
+     * Called once the login is completed/failed
      */
     @Override
     public void onDestroy() {

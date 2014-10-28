@@ -85,8 +85,8 @@ public class Controller {
     /**
      * Switch back to the default fragment
      */
-    public void switchToDefaultFragment() {
-        switchToFragment(mainFragment, null);
+    public void switchToConnectFragment() {
+        switchToFragment(connectFragment, null);
     }
 
     // Twitter Methods

@@ -23,6 +23,8 @@ import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
 
 /**
+ * Twitter Controller
+ *
  * Created by Marcus on 2014-10-23.
  */
 public class TwitterController {
@@ -38,9 +40,9 @@ public class TwitterController {
     /**
      * Constructor to handle the Twitter Login
      *
-     * @param fragmentView
-     * @param fragment
-     * @param controller
+     * @param fragmentView -
+     * @param fragment -
+     * @param controller -
      */
     public TwitterController(final View fragmentView, android.support.v4.app.Fragment fragment, Controller controller) {
         this.fragment = fragment;
@@ -50,7 +52,7 @@ public class TwitterController {
         twitterConsumerSecret = Secrets.CONSUMER_SECRET;
         if (twitterConsumerKey.length() <= 0 || twitterConsumerSecret.length() <= 0) {
             Log.e(Constants.TWITTER_TAG, "ERROR: Consumer Key and Consumer Secret required!");
-            controller.switchToDefaultFragment();
+            controller.switchToConnectFragment();
         }
 
         mProgressDialog = new ProgressDialog(fragment.getActivity());
@@ -108,21 +110,21 @@ public class TwitterController {
     /**
      * Check if we are connected to twitter
      *
-     * @param ctx
-     * @return
+     * @param context The context
+     * @return true if we are connected to twitter else false
      */
-    public static boolean isConnected(Context ctx) {
-        SharedPreferences sharedPrefs = ctx.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
+    public static boolean isConnected(Context context) {
+        SharedPreferences sharedPrefs = context.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
         return sharedPrefs.getString(Constants.PREF_KEY_TOKEN, null) != null;
     }
 
     /**
      * Logout of twitter
      *
-     * @param ctx
+     * @param context The context
      */
-    public static void logOutOfTwitter(Context ctx) {
-        SharedPreferences sharedPrefs = ctx.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
+    public static void logOutOfTwitter(Context context) {
+        SharedPreferences sharedPrefs = context.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putString(Constants.PREF_KEY_TOKEN, null);
         editor.putString(Constants.PREF_KEY_SECRET, null);
@@ -132,28 +134,29 @@ public class TwitterController {
     /**
      * Get the Access Token
      *
-     * @param ctx
-     * @return
+     * @param context The context
+     * @return The access token
      */
-    public static String getAccessToken(Context ctx) {
-        SharedPreferences sharedPrefs = ctx.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
+    public static String getAccessToken(Context context) {
+        SharedPreferences sharedPrefs = context.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
         return sharedPrefs.getString(Constants.PREF_KEY_TOKEN, null);
     }
 
     /**
      * Get the Secret Access Token
      *
-     * @param ctx
-     * @return
+     * @param context The context
+     * @return The access token secret
      */
-    public static String getAccessTokenSecret(Context ctx) {
-        SharedPreferences sharedPrefs = ctx.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
+    public static String getAccessTokenSecret(Context context) {
+        SharedPreferences sharedPrefs = context.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
         return sharedPrefs.getString(Constants.PREF_KEY_SECRET, null);
     }
 
     /**
      * Save the token received from the user
-     * @param uri
+     *
+     * @param uri The uri to use
      */
     private void saveAccessTokenAndFinish(final Uri uri) {
         new Thread(new Runnable() {
@@ -174,7 +177,7 @@ public class TwitterController {
                     else
                         Log.e(Constants.TWITTER_TAG, "ERROR: Twitter callback failed");
                 }
-                controller.switchToDefaultFragment();
+                controller.switchToConnectFragment();
             }
         }).start();
     }
@@ -201,7 +204,7 @@ public class TwitterController {
                         public void run() {
                             mProgressDialog.cancel();
                             Toast.makeText(fragment.getActivity(), errorString, Toast.LENGTH_SHORT).show();
-                            controller.switchToDefaultFragment();
+                            controller.switchToConnectFragment();
                         }
                     });
                     e.printStackTrace();
