@@ -64,7 +64,8 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
         btnTestFB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                controller.publishTestStory("Test to facebook from app");
+                controller.publishToFacebook("Test from app");
+                controller.publishToTwitter("Test from app");
             }
         });
     }
