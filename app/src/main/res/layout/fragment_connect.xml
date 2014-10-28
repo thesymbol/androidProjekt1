@@ -20,4 +20,12 @@
         android:layout_centerHorizontal="true"
         android:text="@string/loginWithTwitter"/>
 
+    <Button
+        android:id="@+id/btnTestFB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test FB Post"
+        android:layout_below="@id/btnTwitterConnect"
+        android:layout_centerHorizontal="true"/>
+
 </RelativeLayout>

@@ -4,7 +4,6 @@ package se.orw.projekt1;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,6 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LoginButton;
-
-import se.orw.projekt1.Twitter.TwitterController;
 
 
 /**
@@ -27,8 +24,7 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
     private Controller controller;
     private UiLifecycleHelper uiHelper;
     private Button btnTwitterConnect;
-    private LoginButton btnFacebookConnect;
-    private Session.StatusCallback callback;
+    private Button btnTestFB;
     //private Button btnGoogleConnect;
 
     public ConnectFragment() {
@@ -50,13 +46,11 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
 
     private void init() {
         btnTwitterConnect = (Button) view.findViewById(R.id.btnTwitterConnect);
-        btnFacebookConnect = (LoginButton) view.findViewById(R.id.btnFacebookConnect);
+        LoginButton btnFacebookConnect = (LoginButton) view.findViewById(R.id.btnFacebookConnect);
         btnFacebookConnect.setFragment(this);
-        if(TwitterController.isConnected(getActivity())) {
-            btnTwitterConnect.setText(R.string.logoutTwitter);
-        } else {
-            btnTwitterConnect.setText(R.string.loginWithTwitter);
-        }
+        btnFacebookConnect.setPublishPermissions(Constants.PERMISSIONS);
+        btnTwitterConnect.setText(controller.updateTwitterButtonText());
+        btnTestFB = (Button) view.findViewById(R.id.btnTestFB);
     }
 
     private void registerListeners() {
@@ -64,6 +58,13 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View view) {
                 controller.twitterConnect();
+                btnTwitterConnect.setText(controller.updateTwitterButtonText());
+            }
+        });
+        btnTestFB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controller.publishTestStory("Test to facebook from app");
             }
         });
     }
@@ -71,7 +72,7 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        callback = new Session.StatusCallback() {
+        Session.StatusCallback callback = new Session.StatusCallback() {
             @Override
             public void call(Session session, SessionState state, Exception exception) {
                 onSessionStateChange(session, state, exception);
@@ -119,17 +120,13 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
     }
 
     /**
-     * Facebook thinggy
+     * Handles facebook login/logouts
      *
      * @param session
      * @param state
      * @param exception
      */
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
-        if (state.isOpened()) {
-            Log.i(Constants.TAG + ".Facebook", "Logged in...");
-        } else if (state.isClosed()) {
-            Log.i(Constants.TAG + ".Facebook", "Logged out...");
-        }
+        controller.onFacebookStateChange(state);
     }
 }

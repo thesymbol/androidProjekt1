@@ -1,6 +1,7 @@
 package se.orw.projekt1;
 
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
@@ -10,6 +11,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.facebook.FacebookRequestError;
+import com.facebook.HttpMethod;
+import com.facebook.Request;
+import com.facebook.RequestAsyncTask;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.SessionState;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Collection;
+import java.util.List;
 
 import se.orw.projekt1.Twitter.TwitterController;
 import se.orw.projekt1.Twitter.TwitterFragment;
@@ -64,7 +80,7 @@ public class Controller {
         TwitterFunctions.postToTwitter(activity, activity, Secrets.CONSUMER_KEY, Secrets.CONSUMER_SECRET, "Test tweet", new TwitterFunctions.TwitterPostResponse() {
             @Override
             public void OnResult(Boolean success) {
-                Log.d(Constants.TAG + ".Controller.TwitterPostResponse", "Success: " + success);
+                Log.d(Constants.TWITTER_TAG, "Success: " + success);
             }
         });
     }
@@ -141,5 +157,72 @@ public class Controller {
             activity.getActionBar().setDisplayHomeAsUpEnabled(true);
             activity.getActionBar().setHomeButtonEnabled(true);
         }
+    }
+
+    public int updateTwitterButtonText() {
+        if(TwitterController.isConnected(activity)) {
+            return R.string.logoutTwitter;
+        }
+        return R.string.loginWithTwitter;
+    }
+
+    public void onFacebookStateChange(SessionState state) {
+        if (state.isOpened()) {
+            Log.i(Constants.FB_TAG, "Logged in...");
+        } else if (state.isClosed()) {
+            Log.i(Constants.FB_TAG, "Logged out...");
+        }
+    }
+
+
+    public void publishTestStory(String message) {
+
+        Session session = Session.getActiveSession();
+
+        if(session != null) {
+            //Check for publish permissions
+            List<String> permissions = session.getPermissions();
+            if(!isSubsetOf(Constants.PERMISSIONS, permissions)) {
+                Session.NewPermissionsRequest newPermissionsRequest = new Session.NewPermissionsRequest(connectFragment, Constants.PERMISSIONS);
+                session.requestNewPublishPermissions(newPermissionsRequest);
+                return;
+            }
+
+            Bundle postParams = new Bundle();
+            postParams.putString("message", message);
+
+            Request.Callback callback = new Request.Callback() {
+                @Override
+                public void onCompleted(Response response) {
+                    JSONObject graphResponse = response.getGraphObject().getInnerJSONObject();
+                    String postId = null;
+                    try {
+                        postId = graphResponse.getString("id");
+                    } catch (JSONException e) {
+                        Log.i(Constants.FB_TAG, "JSON error " + e.getMessage());
+                    }
+                    FacebookRequestError error = response.getError();
+                    if(error != null) {
+                        Toast.makeText(activity, error.getErrorMessage(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(activity, postId, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            };
+
+            Request request = new Request(session, "me/feed", postParams, HttpMethod.POST, callback);
+
+            RequestAsyncTask task = new RequestAsyncTask(request);
+            task.execute();
+        }
+    }
+
+    private boolean isSubsetOf(Collection<String> subset, Collection<String> superset) {
+        for (String string : subset) {
+            if (!superset.contains(string)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

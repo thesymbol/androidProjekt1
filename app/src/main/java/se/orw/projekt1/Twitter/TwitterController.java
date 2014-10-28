@@ -49,7 +49,7 @@ public class TwitterController {
         twitterConsumerKey = Secrets.CONSUMER_KEY;
         twitterConsumerSecret = Secrets.CONSUMER_SECRET;
         if (twitterConsumerKey.length() <= 0 || twitterConsumerSecret.length() <= 0) {
-            Log.e(Constants.TAG + ".TwitterActivity.TwitterController", "ERROR: Consumer Key and Consumer Secret required!");
+            Log.e(Constants.TWITTER_TAG, "ERROR: Consumer Key and Consumer Secret required!");
             controller.switchToDefaultFragment();
         }
 
@@ -90,7 +90,7 @@ public class TwitterController {
         });
 
 
-        Log.d(Constants.TAG + ".TwitterActivity.TwitterController", "ASK OAUTH");
+        Log.d(Constants.TWITTER_TAG, "ASK OAUTH");
         askOAuth();
     }
 
@@ -167,12 +167,12 @@ public class TwitterController {
                     e.putString(Constants.PREF_KEY_TOKEN, accessToken.getToken());
                     e.putString(Constants.PREF_KEY_SECRET, accessToken.getTokenSecret());
                     e.commit();
-                    Log.d(Constants.TAG + ".TwitterActivity.TwitterController", "TWITTER LOGIN SUCCESS!!!");
+                    Log.d(Constants.TWITTER_TAG, "TWITTER LOGIN SUCCESS!!!");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    if (e.getMessage() != null) Log.e(Constants.TAG, e.getMessage());
+                    if (e.getMessage() != null) Log.e(Constants.TWITTER_TAG, e.getMessage());
                     else
-                        Log.e(Constants.TAG + ".TwitterActivity.TwitterController", "ERROR: Twitter callback failed");
+                        Log.e(Constants.TWITTER_TAG, "ERROR: Twitter callback failed");
                 }
                 controller.switchToDefaultFragment();
             }
@@ -211,7 +211,7 @@ public class TwitterController {
                 fragment.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d(Constants.TAG + ".TwitterActivity.TwitterController", "LOADING AUTH URL");
+                        Log.d(Constants.TWITTER_TAG, "LOADING AUTH URL");
                         twitterLoginWebView.loadUrl(requestToken.getAuthenticationURL());
                     }
                 });
