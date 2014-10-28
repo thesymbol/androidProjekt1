@@ -2,7 +2,6 @@ package se.orw.projekt1;
 
 
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 /**
  *
  */
-public class MainFragment extends Fragment {
+public class MainFragment extends android.support.v4.app.Fragment {
     private Button btnTranslate;
     private EditText etTextBox;
     private TextView tvPhrase;

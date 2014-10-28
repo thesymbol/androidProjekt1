@@ -13,7 +13,7 @@ import se.orw.projekt1.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TwitterFragment extends Fragment {
+public class TwitterFragment extends android.support.v4.app.Fragment {
     private View view;
     private TwitterController twitterController;
     private Controller controller;
@@ -22,10 +22,22 @@ public class TwitterFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * Sets the controller
+     *
+     * @param controller
+     */
     public void setController(Controller controller) {
         this.controller = controller;
     }
 
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_twitter, container, false);
@@ -33,6 +45,9 @@ public class TwitterFragment extends Fragment {
         return view;
     }
 
+    /**
+     *
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();

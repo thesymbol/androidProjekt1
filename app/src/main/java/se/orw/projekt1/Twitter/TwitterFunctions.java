@@ -17,6 +17,15 @@ public class TwitterFunctions {
     public TwitterFunctions() {
     }
 
+    /**
+     *
+     * @param c
+     * @param callingActivity
+     * @param consumerKey
+     * @param consumerSecret
+     * @param message
+     * @param postResponse
+     */
     public static void postToTwitter(Context c, final Activity callingActivity, final String consumerKey, final String consumerSecret, final String message, final TwitterPostResponse postResponse) {
         if (!TwitterController.isConnected(c)) {
             postResponse.OnResult(false);
@@ -55,6 +64,9 @@ public class TwitterFunctions {
         }).start();
     }
 
+    /**
+     *
+     */
     public static abstract class TwitterPostResponse {
         public abstract void OnResult(Boolean success);
     }

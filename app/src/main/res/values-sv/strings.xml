@@ -8,4 +8,6 @@
     <string name="drawerClose">Stäng lådar</string>
     <string name ="Phrase">Vänligen skriv in den önskade frasen du vill översätta.</string>
     <string name ="Translate">Översätt</string>
+    <string name="loginWithTwitter">Logga in med Twitter</string>
+    <string name="logoutTwitter">Logga ut från Twitter</string>
 </resources>
