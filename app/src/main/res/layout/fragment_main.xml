@@ -13,7 +13,7 @@
 
         android:id="@+id/tvPhrase"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/vAGZp"
+        android:background="@drawable/top"
         android:textColor="@color/Black"
         android:textSize="20sp" />
 
@@ -30,21 +30,13 @@
         android:layout_height="wrap_content"
         android:text="@string/FaceBook"
         android:id="@+id/cbFacebook"
-        android:layout_gravity="center_horizontal"
-        android:shadowRadius="5"
-        android:shadowDx="5"
-        android:shadowDy="2321"
-        android:shadowColor="@color/Black"/>
+        android:layout_gravity="center_horizontal"/>
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Twitter"
         android:id="@+id/cbTwitter"
-        android:shadowRadius="100"
-        android:shadowDx="5"
-        android:shadowDy="5"
-        android:shadowColor="@color/White"
         android:layout_gravity="center_horizontal" />
 
     <CheckBox
@@ -52,13 +44,7 @@
         android:layout_height="wrap_content"
         android:text="@string/Google"
         android:id="@+id/cbGoogle"
-        android:layout_gravity="center_horizontal"
-        android:longClickable="false"
-        android:shadowRadius="3"
-        android:shadowDx="3"
-        android:shadowDy="2"
-        android:shadowColor="@color/Black"
-        android:singleLine="false" />/>
+        android:layout_gravity="center_horizontal"/>
 
     <Button
         android:layout_width="match_parent"
