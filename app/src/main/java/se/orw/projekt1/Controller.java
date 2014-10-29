@@ -46,6 +46,7 @@ public class Controller {
 
     /**
      * Constructor
+     * author: Marcus
      *
      * @param activity The FragmentActivity of the app
      */
@@ -67,6 +68,7 @@ public class Controller {
 
     /**
      * Switch to specified fragment
+     * author: Marcus
      *
      * @param fragment The fragment to switch to
      * @param tag      The tag for the fragment
@@ -84,6 +86,7 @@ public class Controller {
 
     /**
      * Switch back to the default fragment
+     * author: Marcus
      */
     public void switchToConnectFragment() {
         switchToFragment(connectFragment, null);
@@ -93,6 +96,7 @@ public class Controller {
 
     /**
      * Updates the text on the twitter button.
+     * author: Marcus
      *
      * @return Id of the strings text.
      */
@@ -105,6 +109,7 @@ public class Controller {
 
     /**
      * Connect to twitter
+     * author: Marcus
      */
     public void twitterConnect() {
         if (TwitterController.isConnected(activity)) {
@@ -116,6 +121,7 @@ public class Controller {
 
     /**
      * Send test message to twitter
+     * author: Marcus
      */
     public void publishToTwitter(String message) {
         //send test tweet
@@ -132,6 +138,7 @@ public class Controller {
     /**
      * Publish story to facebook
      * will need publish_access permission
+     * author: Marcus
      *
      * @param message The message to publish
      */
@@ -178,6 +185,7 @@ public class Controller {
 
     /**
      * Handle what will happen if facebook is logged in or out
+     * author: Marcus
      *
      * @param state The session state (logged in or out).
      */
@@ -193,6 +201,7 @@ public class Controller {
 
     /**
      * Get the drawerToggle (to be used in Activity)
+     * author: Marcus
      *
      * @return drawerToggle
      */
@@ -204,6 +213,7 @@ public class Controller {
 
     /**
      * Compare two collections if they are the same return true
+     * author: Marcus
      *
      * @param subset   The set you want to find in the superset
      * @param superset The set to search in
@@ -220,6 +230,7 @@ public class Controller {
 
     /**
      * Initialize the navigation drawer
+     * author: Marcus
      */
     private void initNavigationDrawer() {
         Log.d(Constants.TAG, "Init navigation drawer");
