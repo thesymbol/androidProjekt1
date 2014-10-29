@@ -16,6 +16,8 @@ import com.facebook.widget.LoginButton;
 
 /**
  * Connect fragment that handles the Sign into * buttons
+ *
+ * Created by Marcus on 2014-10-23.
  */
 public class ConnectFragment extends android.support.v4.app.Fragment {
     private View view;

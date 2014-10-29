@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * Constants for the app to use
+ *
  * Created by Marcus on 2014-10-23.
  */
 public class Constants {

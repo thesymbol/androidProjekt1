@@ -31,7 +31,7 @@ import se.orw.projekt1.Twitter.TwitterFunctions;
 
 /**
  * Controller for app
- * <p/>
+ *
  * Created by Marcus on 2014-10-22.
  */
 @SuppressWarnings("deprecation")
@@ -119,7 +119,7 @@ public class Controller {
      */
     public void publishToTwitter(String message) {
         //send test tweet
-        TwitterFunctions.postToTwitter(activity, activity, Secrets.CONSUMER_KEY, Secrets.CONSUMER_SECRET, message, new TwitterFunctions.TwitterPostResponse() {
+        TwitterFunctions.postToTwitter(activity, activity, Secrets.TWITTER_CONSUMER_KEY, Secrets.TWITTER_CONSUMER_SECRET, message, new TwitterFunctions.TwitterPostResponse() {
             @Override
             public void OnResult(Boolean success) {
                 Log.d(Constants.TWITTER_TAG, "Success: " + success);
@@ -222,6 +222,7 @@ public class Controller {
      * Initialize the navigation drawer
      */
     private void initNavigationDrawer() {
+        Log.d(Constants.TAG, "Init navigation drawer");
         drawerLayout = (DrawerLayout) activity.findViewById(R.id.layout_drawer);
         ListView drawerList = (ListView) activity.findViewById(R.id.left_drawer);
 

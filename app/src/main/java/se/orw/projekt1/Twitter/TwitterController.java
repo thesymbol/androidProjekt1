@@ -1,5 +1,6 @@
 package se.orw.projekt1.Twitter;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -24,9 +25,10 @@ import twitter4j.conf.ConfigurationBuilder;
 
 /**
  * Twitter Controller
- * <p/>
+ *
  * Created by Marcus on 2014-10-23.
  */
+@SuppressLint("CommitPrefEdits")
 public class TwitterController {
     private static Twitter twitter;
     private static RequestToken requestToken;
@@ -48,8 +50,8 @@ public class TwitterController {
         this.fragment = fragment;
         this.controller = controller;
 
-        twitterConsumerKey = Secrets.CONSUMER_KEY;
-        twitterConsumerSecret = Secrets.CONSUMER_SECRET;
+        twitterConsumerKey = Secrets.TWITTER_CONSUMER_KEY;
+        twitterConsumerSecret = Secrets.TWITTER_CONSUMER_SECRET;
         if (twitterConsumerKey.length() <= 0 || twitterConsumerSecret.length() <= 0) {
             Log.e(Constants.TWITTER_TAG, "Consumer Key and Consumer Secret required");
             controller.switchToConnectFragment();
@@ -160,6 +162,7 @@ public class TwitterController {
      */
     private void saveAccessTokenAndFinish(final Uri uri) {
         new Thread(new Runnable() {
+            @SuppressLint("CommitPrefEdits")
             @Override
             public void run() {
                 String verifier = uri.getQueryParameter(Constants.IEXTRA_OAUTH_VERIFIER);

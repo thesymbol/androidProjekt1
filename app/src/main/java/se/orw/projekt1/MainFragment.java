@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 /**
+ * The main fragment
  *
+ * Created by Mattias on 2014-10-28.
  */
 public class MainFragment extends android.support.v4.app.Fragment {
     private CheckBox cbFacebook, cbTwitter, cbGoogle;

@@ -10,7 +10,11 @@ import android.view.MenuItem;
 import com.facebook.AppEventsLogger;
 import com.facebook.Session;
 
-
+/**
+ * The main activity for the app
+ *
+ * Created by Marcus on 2014-10-22.
+ */
 public class MainActivity extends FragmentActivity {
     private Controller controller;
 

@@ -11,6 +11,8 @@ import twitter4j.conf.ConfigurationBuilder;
 
 /**
  * The Twitter functions for twitter (like posting)
+ *
+ * Created by Marcus on 2014-10-23.
  */
 public class TwitterFunctions {
 
