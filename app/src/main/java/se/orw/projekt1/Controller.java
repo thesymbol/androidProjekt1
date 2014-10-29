@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -57,7 +56,7 @@ public class Controller {
         menu = new String[]{activity.getResources().getString(R.string.menuHome), activity.getResources().getString(R.string.menuConnect)};
 
         mainFragment = new MainFragment();
-        //mainFragment.setController(this);
+        mainFragment.setController(this);
 
         connectFragment = new ConnectFragment();
         connectFragment.setController(this);

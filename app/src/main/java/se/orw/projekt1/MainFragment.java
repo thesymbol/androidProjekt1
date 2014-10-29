@@ -26,7 +26,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
         // Required empty public constructor
     }
 
-    public void setController() {
+    public void setController(Controller controller) {
         this.controller = controller;
     }
 
@@ -41,7 +41,6 @@ public class MainFragment extends android.support.v4.app.Fragment {
         tvPhrase = (TextView) view.findViewById(R.id.tvPhrase);
         btnSend = (Button)view.findViewById(R.id.btnSend);
         btnSend.setOnClickListener(new ButtonClickListener());
-        etTextBox.getText().toString();
         return view;
     }
 
