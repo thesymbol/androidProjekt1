@@ -1,4 +1,4 @@
-<LinearLayout
+<RelativeLayout
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -10,48 +10,56 @@
         android:layout_width="match_parent"
         android:layout_height="57dp"
         android:text="@string/Phrase"
-
         android:id="@+id/tvPhrase"
-        android:layout_gravity="center_horizontal"
         android:background="@drawable/top"
         android:textColor="@color/Black"
         android:textSize="20sp" />
-
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="166dp"
         android:id="@+id/etTextBox"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/background3" />
+        android:layout_below="@id/tvPhrase"
+        android:background="@drawable/background3"
+        android:inputType="textAutoCorrect" />
 
-    <CheckBox
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/FaceBook"
-        android:id="@+id/cbFacebook"
-        android:layout_gravity="center_horizontal"/>
+        android:background="@drawable/linearlayout_bg"
+        android:padding="10dp"
+        android:id="@+id/submitBox"
+        android:layout_below="@+id/etTextBox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp">
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Twitter"
-        android:id="@+id/cbTwitter"
-        android:layout_gravity="center_horizontal" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/FaceBook"
+            android:id="@+id/cbFacebook"
+            android:layout_gravity="center_horizontal"/>
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Google"
-        android:id="@+id/cbGoogle"
-        android:layout_gravity="center_horizontal"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Twitter"
+            android:id="@+id/cbTwitter"
+            android:layout_gravity="center_horizontal" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnSend"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/Send" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Google"
+            android:id="@+id/cbGoogle"
+            android:layout_gravity="center_horizontal"/>
 
-
-</LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSend"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/Send" />
+    </LinearLayout>
+</RelativeLayout>
