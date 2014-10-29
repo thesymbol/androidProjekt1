@@ -10,6 +10,7 @@
     <string name ="FaceBook">Facebook</string>
     <string name ="Twitter">Twitter</string>
     <string name="Google">Google+</string>
+    <string name="Send">Skicka</string>
     <string name ="Translate">Översätt</string>
     <string name="loginWithTwitter">Logga in med Twitter</string>
     <string name="logoutTwitter">Logga ut</string>

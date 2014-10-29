@@ -11,6 +11,7 @@
     <string name ="FaceBook">Facebook</string>
     <string name ="Twitter">Twitter</string>
     <string name="Google">Google+</string>
+    <string name="Send">Send</string>
     <string name="Translate">Translate</string>
     <string name="app_id">881591251851457</string>
     <string name="loginWithTwitter">Log in with Twitter</string>

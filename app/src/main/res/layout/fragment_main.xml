@@ -2,7 +2,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/background2"
+    android:background="@drawable/bkg1"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:weightSum="1">
 
@@ -10,10 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="57dp"
         android:text="@string/Phrase"
+
         android:id="@+id/tvPhrase"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/background"
+        android:background="@drawable/vAGZp"
+        android:textColor="@color/Black"
         android:textSize="20sp" />
+
 
     <EditText
         android:layout_width="match_parent"
@@ -27,13 +30,21 @@
         android:layout_height="wrap_content"
         android:text="@string/FaceBook"
         android:id="@+id/cbFacebook"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:shadowRadius="5"
+        android:shadowDx="5"
+        android:shadowDy="2321"
+        android:shadowColor="@color/Black"/>
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Twitter"
         android:id="@+id/cbTwitter"
+        android:shadowRadius="100"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowColor="@color/White"
         android:layout_gravity="center_horizontal" />
 
     <CheckBox
@@ -42,7 +53,19 @@
         android:text="@string/Google"
         android:id="@+id/cbGoogle"
         android:layout_gravity="center_horizontal"
-        android:longClickable="true" />
+        android:longClickable="false"
+        android:shadowRadius="3"
+        android:shadowDx="3"
+        android:shadowDy="2"
+        android:shadowColor="@color/Black"
+        android:singleLine="false" />/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSend"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/Send" />
 
 
 </LinearLayout>
