@@ -10,7 +10,7 @@ import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
 
 /**
- * Created by Marcus on 2014-10-23.
+ * The Twitter functions for twitter (like posting)
  */
 public class TwitterFunctions {
 
@@ -18,13 +18,12 @@ public class TwitterFunctions {
     }
 
     /**
-     *
-     * @param c
-     * @param callingActivity
-     * @param consumerKey
-     * @param consumerSecret
-     * @param message
-     * @param postResponse
+     * @param c -
+     * @param callingActivity -
+     * @param consumerKey -
+     * @param consumerSecret -
+     * @param message -
+     * @param postResponse -
      */
     public static void postToTwitter(Context c, final Activity callingActivity, final String consumerKey, final String consumerSecret, final String message, final TwitterPostResponse postResponse) {
         if (!TwitterController.isConnected(c)) {

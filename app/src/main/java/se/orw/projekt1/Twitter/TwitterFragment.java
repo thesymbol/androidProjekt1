@@ -32,8 +32,8 @@ public class TwitterFragment extends android.support.v4.app.Fragment {
     }
 
     /**
-     * @param inflater -
-     * @param container -
+     * @param inflater           -
+     * @param container          -
      * @param savedInstanceState -
      * @return -
      */

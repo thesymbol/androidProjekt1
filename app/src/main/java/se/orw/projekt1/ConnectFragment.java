@@ -1,7 +1,6 @@
 package se.orw.projekt1;
 
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,8 +15,7 @@ import com.facebook.widget.LoginButton;
 
 
 /**
- * A simple {@link Fragment} subclass.
- *
+ * Connect fragment that handles the Sign into * buttons
  */
 public class ConnectFragment extends android.support.v4.app.Fragment {
     private View view;
@@ -76,7 +74,7 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
         Session.StatusCallback callback = new Session.StatusCallback() {
             @Override
             public void call(Session session, SessionState state, Exception exception) {
-                onSessionStateChange(session, state, exception);
+                onSessionStateChange(state);
             }
         };
         uiHelper = new UiLifecycleHelper(getActivity(), callback);
@@ -90,8 +88,8 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
         // session is not null, the session state change notification
         // may not be triggered. Trigger it if it's open/closed.
         Session session = Session.getActiveSession();
-        if(session != null && (session.isOpened() || session.isClosed())) {
-            onSessionStateChange(session, session.getState(), null);
+        if (session != null && (session.isOpened() || session.isClosed())) {
+            onSessionStateChange(session.getState());
         }
         uiHelper.onResume();
     }
@@ -122,12 +120,9 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
 
     /**
      * Handles facebook login/logouts
-     *
-     * @param session
-     * @param state
-     * @param exception
-     */
-    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+     *  @param state -
+     * */
+    private void onSessionStateChange(SessionState state) {
         controller.onFacebookStateChange(state);
     }
 }

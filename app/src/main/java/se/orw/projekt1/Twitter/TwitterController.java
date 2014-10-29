@@ -24,7 +24,7 @@ import twitter4j.conf.ConfigurationBuilder;
 
 /**
  * Twitter Controller
- *
+ * <p/>
  * Created by Marcus on 2014-10-23.
  */
 public class TwitterController {
@@ -41,8 +41,8 @@ public class TwitterController {
      * Constructor to handle the Twitter Login
      *
      * @param fragmentView -
-     * @param fragment -
-     * @param controller -
+     * @param fragment     -
+     * @param controller   -
      */
     public TwitterController(final View fragmentView, android.support.v4.app.Fragment fragment, Controller controller) {
         this.fragment = fragment;
@@ -51,7 +51,7 @@ public class TwitterController {
         twitterConsumerKey = Secrets.CONSUMER_KEY;
         twitterConsumerSecret = Secrets.CONSUMER_SECRET;
         if (twitterConsumerKey.length() <= 0 || twitterConsumerSecret.length() <= 0) {
-            Log.e(Constants.TWITTER_TAG, "ERROR: Consumer Key and Consumer Secret required!");
+            Log.e(Constants.TWITTER_TAG, "Consumer Key and Consumer Secret required");
             controller.switchToConnectFragment();
         }
 
@@ -92,7 +92,7 @@ public class TwitterController {
         });
 
 
-        Log.d(Constants.TWITTER_TAG, "ASK OAUTH");
+        Log.d(Constants.TWITTER_TAG, "Asking for OAuth");
         askOAuth();
     }
 
@@ -170,12 +170,12 @@ public class TwitterController {
                     e.putString(Constants.PREF_KEY_TOKEN, accessToken.getToken());
                     e.putString(Constants.PREF_KEY_SECRET, accessToken.getTokenSecret());
                     e.commit();
-                    Log.d(Constants.TWITTER_TAG, "TWITTER LOGIN SUCCESS!!!");
+                    Log.d(Constants.TWITTER_TAG, "Login Successful");
                 } catch (Exception e) {
                     e.printStackTrace();
                     if (e.getMessage() != null) Log.e(Constants.TWITTER_TAG, e.getMessage());
                     else
-                        Log.e(Constants.TWITTER_TAG, "ERROR: Twitter callback failed");
+                        Log.e(Constants.TWITTER_TAG, "Callback Failed");
                 }
                 controller.switchToConnectFragment();
             }
@@ -214,7 +214,7 @@ public class TwitterController {
                 fragment.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d(Constants.TWITTER_TAG, "LOADING AUTH URL");
+                        Log.d(Constants.TWITTER_TAG, "Loading Auth URL");
                         twitterLoginWebView.loadUrl(requestToken.getAuthenticationURL());
                     }
                 });

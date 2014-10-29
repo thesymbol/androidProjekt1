@@ -31,7 +31,7 @@ import se.orw.projekt1.Twitter.TwitterFunctions;
 
 /**
  * Controller for app
- *
+ * <p/>
  * Created by Marcus on 2014-10-22.
  */
 @SuppressWarnings("deprecation")
@@ -90,13 +90,14 @@ public class Controller {
     }
 
     // Twitter Methods
+
     /**
      * Updates the text on the twitter button.
      *
      * @return Id of the strings text.
      */
     public int updateTwitterButtonText() {
-        if(TwitterController.isConnected(activity)) {
+        if (TwitterController.isConnected(activity)) {
             return R.string.logoutTwitter;
         }
         return R.string.loginWithTwitter;
@@ -106,7 +107,7 @@ public class Controller {
      * Connect to twitter
      */
     public void twitterConnect() {
-        if(TwitterController.isConnected(activity)) {
+        if (TwitterController.isConnected(activity)) {
             TwitterController.logOutOfTwitter(activity);
         } else {
             switchToFragment(twitterFragment, null);
@@ -127,6 +128,7 @@ public class Controller {
     }
 
     //Facebook Methods
+
     /**
      * Publish story to facebook
      * will need publish_access permission
@@ -136,10 +138,10 @@ public class Controller {
     public void publishToFacebook(String message) {
         Session session = Session.getActiveSession();
 
-        if(session != null && session.isOpened()) {
+        if (session != null && session.isOpened()) {
             //Check for publish permissions
             List<String> permissions = session.getPermissions();
-            if(!isSubsetOf(Constants.PERMISSIONS, permissions)) {
+            if (!isSubsetOf(Constants.PERMISSIONS, permissions)) {
                 Session.NewPermissionsRequest newPermissionsRequest = new Session.NewPermissionsRequest(connectFragment, Constants.PERMISSIONS);
                 session.requestNewPublishPermissions(newPermissionsRequest);
                 return;
@@ -159,7 +161,7 @@ public class Controller {
                         Log.i(Constants.FB_TAG, "JSON error " + e.getMessage());
                     }
                     FacebookRequestError error = response.getError();
-                    if(error != null) {
+                    if (error != null) {
                         Toast.makeText(activity, error.getErrorMessage(), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(activity, postId, Toast.LENGTH_SHORT).show();
@@ -188,6 +190,7 @@ public class Controller {
     }
 
     // Protected Methods
+
     /**
      * Get the drawerToggle (to be used in Activity)
      *
@@ -198,10 +201,11 @@ public class Controller {
     }
 
     // Private Methods
+
     /**
      * Compare two collections if they are the same return true
      *
-     * @param subset The set you want to find in the superset
+     * @param subset   The set you want to find in the superset
      * @param superset The set to search in
      * @return true if the superset contains the subset (eg, asd contains an a) else false.
      */
@@ -227,7 +231,7 @@ public class Controller {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 if (menu[position].equals("Connect")) {
                     switchToFragment(connectFragment, null);
-                } else if(menu[position].equals("Home")) {
+                } else if (menu[position].equals("Home")) {
                     switchToFragment(mainFragment, null);
                 }
 
@@ -236,7 +240,7 @@ public class Controller {
         });
         drawerToggle = new ActionBarDrawerToggle(activity, drawerLayout, R.drawable.ic_drawer, R.string.drawerOpen, R.string.drawerClose);
         drawerLayout.setDrawerListener(drawerToggle);
-        if(activity.getActionBar() != null) {
+        if (activity.getActionBar() != null) {
             activity.getActionBar().setDisplayHomeAsUpEnabled(true);
             activity.getActionBar().setHomeButtonEnabled(true);
         }
