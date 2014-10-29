@@ -13,4 +13,6 @@
     <string name ="Translate">Översätt</string>
     <string name="loginWithTwitter">Logga in med Twitter</string>
     <string name="logoutTwitter">Logga ut</string>
+    <string name="menuHome">Hem</string>
+    <string name="menuConnect">Anslut</string>
 </resources>

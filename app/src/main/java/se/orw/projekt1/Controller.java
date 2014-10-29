@@ -3,6 +3,7 @@ package se.orw.projekt1;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
@@ -42,7 +43,7 @@ public class Controller {
     private TwitterFragment twitterFragment;
     private ActionBarDrawerToggle drawerToggle;
     private DrawerLayout drawerLayout;
-    private String[] menu = {"Home", "Connect"};
+    private String[] menu;
 
     /**
      * Constructor
@@ -52,6 +53,7 @@ public class Controller {
      */
     public Controller(FragmentActivity activity) {
         this.activity = activity;
+        menu = new String[]{activity.getResources().getString(R.string.menuHome), activity.getResources().getString(R.string.menuConnect)};
 
         mainFragment = new MainFragment();
         //mainFragment.setController(this);
@@ -236,14 +238,15 @@ public class Controller {
         Log.d(Constants.TAG, "Init navigation drawer");
         drawerLayout = (DrawerLayout) activity.findViewById(R.id.layout_drawer);
         ListView drawerList = (ListView) activity.findViewById(R.id.left_drawer);
+        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         drawerList.setAdapter(new ArrayAdapter<String>(activity, R.layout.drawer_list_item, menu));
         drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                if (menu[position].equals("Connect")) {
+                if (menu[position].equals(activity.getResources().getString(R.string.menuConnect))) {
                     switchToFragment(connectFragment, null);
-                } else if (menu[position].equals("Home")) {
+                } else if (menu[position].equals(activity.getResources().getString(R.string.menuHome))) {
                     switchToFragment(mainFragment, null);
                 }
 
