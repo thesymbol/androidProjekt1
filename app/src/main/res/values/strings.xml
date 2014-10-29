@@ -16,4 +16,6 @@
     <string name="app_id">881591251851457</string>
     <string name="loginWithTwitter">Log in with Twitter</string>
     <string name="logoutTwitter">Log out</string>
+    <string name="menuHome">Home</string>
+    <string name="menuConnect">Connect</string>
 </resources>

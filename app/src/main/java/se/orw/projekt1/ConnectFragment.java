@@ -31,11 +31,25 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * Sets the controller
+     * author: Marcus
+     *
+     * @param controller The controller
+     */
     public void setController(Controller controller) {
         this.controller = controller;
     }
 
-
+    /**
+     * The fragment's initial view
+     * author: Marcus
+     *
+     * @param inflater -
+     * @param container -
+     * @param savedInstanceState -
+     * @return -
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_connect, container, false);
@@ -44,6 +58,10 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
         return view;
     }
 
+    /**
+     * Initialize the fragment
+     * author: Marcus
+     */
     private void init() {
         btnTwitterConnect = (Button) view.findViewById(R.id.btnTwitterConnect);
         LoginButton btnFacebookConnect = (LoginButton) view.findViewById(R.id.btnFacebookConnect);
@@ -53,6 +71,10 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
         btnTestFB = (Button) view.findViewById(R.id.btnTestFB);
     }
 
+    /**
+     * Register listeners for buttons
+     * author: Marcus
+     */
     private void registerListeners() {
         btnTwitterConnect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +92,12 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
         });
     }
 
+    /**
+     * The onCreate method of the Fragment Overridden for facebook API.
+     * author: Marcus
+     *
+     * @param savedInstanceState -
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +111,10 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
         uiHelper.onCreate(savedInstanceState);
     }
 
+    /**
+     * Facebook onResume Override
+     * author: Marcus
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -96,24 +128,46 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
         uiHelper.onResume();
     }
 
+    /**
+     * Facebook onActivityResult Override
+     * author: Marcus
+     *
+     * @param requestCode -
+     * @param resultCode -
+     * @param data -
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         uiHelper.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * Facebook onPause Override
+     * author: Marcus
+     */
     @Override
     public void onPause() {
         super.onPause();
         uiHelper.onPause();
     }
 
+    /**
+     * Facebook onDestroy Override
+     * author: Marcus
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
         uiHelper.onDestroy();
     }
 
+    /**
+     * Facebook onSaveInstanceState Override
+     * author: Marcus
+     *
+     * @param outState -
+     */
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -121,8 +175,8 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
     }
 
     /**
-     * Handles facebook login/logouts
-     *  @param state -
+     * Handles facebook log in/log outs
+     * @param state The state the Facebook API is in.
      * */
     private void onSessionStateChange(SessionState state) {
         controller.onFacebookStateChange(state);

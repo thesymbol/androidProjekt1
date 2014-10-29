@@ -3,6 +3,7 @@ package se.orw.projekt1;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.View;
@@ -42,15 +43,17 @@ public class Controller {
     private TwitterFragment twitterFragment;
     private ActionBarDrawerToggle drawerToggle;
     private DrawerLayout drawerLayout;
-    private String[] menu = {"Home", "Connect"};
+    private String[] menu;
 
     /**
      * Constructor
+     * author: Marcus
      *
      * @param activity The FragmentActivity of the app
      */
     public Controller(FragmentActivity activity) {
         this.activity = activity;
+        menu = new String[]{activity.getResources().getString(R.string.menuHome), activity.getResources().getString(R.string.menuConnect)};
 
         mainFragment = new MainFragment();
         //mainFragment.setController(this);
@@ -67,6 +70,7 @@ public class Controller {
 
     /**
      * Switch to specified fragment
+     * author: Marcus
      *
      * @param fragment The fragment to switch to
      * @param tag      The tag for the fragment
@@ -84,6 +88,7 @@ public class Controller {
 
     /**
      * Switch back to the default fragment
+     * author: Marcus
      */
     public void switchToConnectFragment() {
         switchToFragment(connectFragment, null);
@@ -93,6 +98,7 @@ public class Controller {
 
     /**
      * Updates the text on the twitter button.
+     * author: Marcus
      *
      * @return Id of the strings text.
      */
@@ -105,6 +111,7 @@ public class Controller {
 
     /**
      * Connect to twitter
+     * author: Marcus
      */
     public void twitterConnect() {
         if (TwitterController.isConnected(activity)) {
@@ -116,6 +123,7 @@ public class Controller {
 
     /**
      * Send test message to twitter
+     * author: Marcus
      */
     public void publishToTwitter(String message) {
         //send test tweet
@@ -132,6 +140,7 @@ public class Controller {
     /**
      * Publish story to facebook
      * will need publish_access permission
+     * author: Marcus
      *
      * @param message The message to publish
      */
@@ -178,6 +187,7 @@ public class Controller {
 
     /**
      * Handle what will happen if facebook is logged in or out
+     * author: Marcus
      *
      * @param state The session state (logged in or out).
      */
@@ -193,6 +203,7 @@ public class Controller {
 
     /**
      * Get the drawerToggle (to be used in Activity)
+     * author: Marcus
      *
      * @return drawerToggle
      */
@@ -204,6 +215,7 @@ public class Controller {
 
     /**
      * Compare two collections if they are the same return true
+     * author: Marcus
      *
      * @param subset   The set you want to find in the superset
      * @param superset The set to search in
@@ -220,19 +232,21 @@ public class Controller {
 
     /**
      * Initialize the navigation drawer
+     * author: Marcus
      */
     private void initNavigationDrawer() {
         Log.d(Constants.TAG, "Init navigation drawer");
         drawerLayout = (DrawerLayout) activity.findViewById(R.id.layout_drawer);
         ListView drawerList = (ListView) activity.findViewById(R.id.left_drawer);
+        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         drawerList.setAdapter(new ArrayAdapter<String>(activity, R.layout.drawer_list_item, menu));
         drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                if (menu[position].equals("Connect")) {
+                if (menu[position].equals(activity.getResources().getString(R.string.menuConnect))) {
                     switchToFragment(connectFragment, null);
-                } else if (menu[position].equals("Home")) {
+                } else if (menu[position].equals(activity.getResources().getString(R.string.menuHome))) {
                     switchToFragment(mainFragment, null);
                 }
 
