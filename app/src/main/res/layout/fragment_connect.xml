@@ -13,11 +13,25 @@
         />
 
     <Button
+        android:background="@drawable/layers_twitter_button_bg"
+        style="@style/twitterButton"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="30dp"
         android:id="@+id/btnTwitterConnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnFacebookConnect"
         android:layout_centerHorizontal="true"
         android:text="@string/loginWithTwitter"/>
+
+    <Button
+        android:id="@+id/btnTestFB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test Post"
+        android:layout_below="@id/btnTwitterConnect"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

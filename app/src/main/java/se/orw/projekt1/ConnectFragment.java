@@ -1,10 +1,8 @@
 package se.orw.projekt1;
 
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,20 +13,18 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LoginButton;
 
-import se.orw.projekt1.Twitter.TwitterController;
-
 
 /**
- * A simple {@link Fragment} subclass.
+ * Connect fragment that handles the Sign into * buttons
  *
+ * Created by Marcus on 2014-10-23.
  */
 public class ConnectFragment extends android.support.v4.app.Fragment {
     private View view;
     private Controller controller;
     private UiLifecycleHelper uiHelper;
     private Button btnTwitterConnect;
-    private LoginButton btnFacebookConnect;
-    private Session.StatusCallback callback;
+    private Button btnTestFB;
     //private Button btnGoogleConnect;
 
     public ConnectFragment() {
@@ -50,13 +46,11 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
 
     private void init() {
         btnTwitterConnect = (Button) view.findViewById(R.id.btnTwitterConnect);
-        btnFacebookConnect = (LoginButton) view.findViewById(R.id.btnFacebookConnect);
+        LoginButton btnFacebookConnect = (LoginButton) view.findViewById(R.id.btnFacebookConnect);
         btnFacebookConnect.setFragment(this);
-        if(TwitterController.isConnected(getActivity())) {
-            btnTwitterConnect.setText(R.string.logoutTwitter);
-        } else {
-            btnTwitterConnect.setText(R.string.loginWithTwitter);
-        }
+        btnFacebookConnect.setPublishPermissions(Constants.PERMISSIONS);
+        btnTwitterConnect.setText(controller.updateTwitterButtonText());
+        btnTestFB = (Button) view.findViewById(R.id.btnTestFB);
     }
 
     private void registerListeners() {
@@ -64,6 +58,14 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View view) {
                 controller.twitterConnect();
+                btnTwitterConnect.setText(controller.updateTwitterButtonText());
+            }
+        });
+        btnTestFB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controller.publishToFacebook("Test from app");
+                controller.publishToTwitter("Test from app");
             }
         });
     }
@@ -71,10 +73,10 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        callback = new Session.StatusCallback() {
+        Session.StatusCallback callback = new Session.StatusCallback() {
             @Override
             public void call(Session session, SessionState state, Exception exception) {
-                onSessionStateChange(session, state, exception);
+                onSessionStateChange(state);
             }
         };
         uiHelper = new UiLifecycleHelper(getActivity(), callback);
@@ -88,8 +90,8 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
         // session is not null, the session state change notification
         // may not be triggered. Trigger it if it's open/closed.
         Session session = Session.getActiveSession();
-        if(session != null && (session.isOpened() || session.isClosed())) {
-            onSessionStateChange(session, session.getState(), null);
+        if (session != null && (session.isOpened() || session.isClosed())) {
+            onSessionStateChange(session.getState());
         }
         uiHelper.onResume();
     }
@@ -119,17 +121,10 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
     }
 
     /**
-     * Facebook thinggy
-     *
-     * @param session
-     * @param state
-     * @param exception
-     */
-    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
-        if (state.isOpened()) {
-            Log.i(Constants.TAG + ".Facebook", "Logged in...");
-        } else if (state.isClosed()) {
-            Log.i(Constants.TAG + ".Facebook", "Logged out...");
-        }
+     * Handles facebook login/logouts
+     *  @param state -
+     * */
+    private void onSessionStateChange(SessionState state) {
+        controller.onFacebookStateChange(state);
     }
 }

@@ -10,7 +10,11 @@ import android.view.MenuItem;
 import com.facebook.AppEventsLogger;
 import com.facebook.Session;
 
-
+/**
+ * The main activity for the app
+ *
+ * Created by Marcus on 2014-10-22.
+ */
 public class MainActivity extends FragmentActivity {
     private Controller controller;
 
@@ -31,19 +35,22 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return controller.onDrawerToggle(item) || super.onOptionsItemSelected(item);
+        // Handles the drawer on the left sides button
+        return controller.getDrawerToggle().onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        controller.onPostCreate();
+        // used to sync the drawer toggle state (opened/closed)
+        controller.getDrawerToggle().syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        controller.onConfigurationChanged(newConfig);
+        // Once the app changes configuration (eg rotation).
+        controller.getDrawerToggle().onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -65,9 +72,10 @@ public class MainActivity extends FragmentActivity {
     /**
      * Gets rid of: "Warning: Sessionless Request needs token but missing either application ID or client token."
      * When facebook API starts
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     *
+     * @param requestCode -
+     * @param resultCode -
+     * @param data -
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

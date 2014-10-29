@@ -1,5 +1,6 @@
 package se.orw.projekt1.Twitter;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -23,8 +24,11 @@ import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
 
 /**
+ * Twitter Controller
+ *
  * Created by Marcus on 2014-10-23.
  */
+@SuppressLint("CommitPrefEdits")
 public class TwitterController {
     private static Twitter twitter;
     private static RequestToken requestToken;
@@ -38,19 +42,19 @@ public class TwitterController {
     /**
      * Constructor to handle the Twitter Login
      *
-     * @param fragmentView
-     * @param fragment
-     * @param controller
+     * @param fragmentView -
+     * @param fragment     -
+     * @param controller   -
      */
     public TwitterController(final View fragmentView, android.support.v4.app.Fragment fragment, Controller controller) {
         this.fragment = fragment;
         this.controller = controller;
 
-        twitterConsumerKey = Secrets.CONSUMER_KEY;
-        twitterConsumerSecret = Secrets.CONSUMER_SECRET;
+        twitterConsumerKey = Secrets.TWITTER_CONSUMER_KEY;
+        twitterConsumerSecret = Secrets.TWITTER_CONSUMER_SECRET;
         if (twitterConsumerKey.length() <= 0 || twitterConsumerSecret.length() <= 0) {
-            Log.e(Constants.TAG + ".TwitterActivity.TwitterController", "ERROR: Consumer Key and Consumer Secret required!");
-            controller.switchToDefaultFragment();
+            Log.e(Constants.TWITTER_TAG, "Consumer Key and Consumer Secret required");
+            controller.switchToConnectFragment();
         }
 
         mProgressDialog = new ProgressDialog(fragment.getActivity());
@@ -90,7 +94,7 @@ public class TwitterController {
         });
 
 
-        Log.d(Constants.TAG + ".TwitterActivity.TwitterController", "ASK OAUTH");
+        Log.d(Constants.TWITTER_TAG, "Asking for OAuth");
         askOAuth();
     }
 
@@ -108,21 +112,21 @@ public class TwitterController {
     /**
      * Check if we are connected to twitter
      *
-     * @param ctx
-     * @return
+     * @param context The context
+     * @return true if we are connected to twitter else false
      */
-    public static boolean isConnected(Context ctx) {
-        SharedPreferences sharedPrefs = ctx.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
+    public static boolean isConnected(Context context) {
+        SharedPreferences sharedPrefs = context.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
         return sharedPrefs.getString(Constants.PREF_KEY_TOKEN, null) != null;
     }
 
     /**
      * Logout of twitter
      *
-     * @param ctx
+     * @param context The context
      */
-    public static void logOutOfTwitter(Context ctx) {
-        SharedPreferences sharedPrefs = ctx.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
+    public static void logOutOfTwitter(Context context) {
+        SharedPreferences sharedPrefs = context.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putString(Constants.PREF_KEY_TOKEN, null);
         editor.putString(Constants.PREF_KEY_SECRET, null);
@@ -132,31 +136,33 @@ public class TwitterController {
     /**
      * Get the Access Token
      *
-     * @param ctx
-     * @return
+     * @param context The context
+     * @return The access token
      */
-    public static String getAccessToken(Context ctx) {
-        SharedPreferences sharedPrefs = ctx.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
+    public static String getAccessToken(Context context) {
+        SharedPreferences sharedPrefs = context.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
         return sharedPrefs.getString(Constants.PREF_KEY_TOKEN, null);
     }
 
     /**
      * Get the Secret Access Token
      *
-     * @param ctx
-     * @return
+     * @param context The context
+     * @return The access token secret
      */
-    public static String getAccessTokenSecret(Context ctx) {
-        SharedPreferences sharedPrefs = ctx.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
+    public static String getAccessTokenSecret(Context context) {
+        SharedPreferences sharedPrefs = context.getSharedPreferences(Constants.PREFERENCE_NAME, Context.MODE_PRIVATE);
         return sharedPrefs.getString(Constants.PREF_KEY_SECRET, null);
     }
 
     /**
      * Save the token received from the user
-     * @param uri
+     *
+     * @param uri The uri to use
      */
     private void saveAccessTokenAndFinish(final Uri uri) {
         new Thread(new Runnable() {
+            @SuppressLint("CommitPrefEdits")
             @Override
             public void run() {
                 String verifier = uri.getQueryParameter(Constants.IEXTRA_OAUTH_VERIFIER);
@@ -167,14 +173,14 @@ public class TwitterController {
                     e.putString(Constants.PREF_KEY_TOKEN, accessToken.getToken());
                     e.putString(Constants.PREF_KEY_SECRET, accessToken.getTokenSecret());
                     e.commit();
-                    Log.d(Constants.TAG + ".TwitterActivity.TwitterController", "TWITTER LOGIN SUCCESS!!!");
+                    Log.d(Constants.TWITTER_TAG, "Login Successful");
                 } catch (Exception e) {
                     e.printStackTrace();
-                    if (e.getMessage() != null) Log.e(Constants.TAG, e.getMessage());
+                    if (e.getMessage() != null) Log.e(Constants.TWITTER_TAG, e.getMessage());
                     else
-                        Log.e(Constants.TAG + ".TwitterActivity.TwitterController", "ERROR: Twitter callback failed");
+                        Log.e(Constants.TWITTER_TAG, "Callback Failed");
                 }
-                controller.switchToDefaultFragment();
+                controller.switchToConnectFragment();
             }
         }).start();
     }
@@ -201,7 +207,7 @@ public class TwitterController {
                         public void run() {
                             mProgressDialog.cancel();
                             Toast.makeText(fragment.getActivity(), errorString, Toast.LENGTH_SHORT).show();
-                            controller.switchToDefaultFragment();
+                            controller.switchToConnectFragment();
                         }
                     });
                     e.printStackTrace();
@@ -211,7 +217,7 @@ public class TwitterController {
                 fragment.getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d(Constants.TAG + ".TwitterActivity.TwitterController", "LOADING AUTH URL");
+                        Log.d(Constants.TWITTER_TAG, "Loading Auth URL");
                         twitterLoginWebView.loadUrl(requestToken.getAuthenticationURL());
                     }
                 });
