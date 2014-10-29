@@ -20,8 +20,11 @@
         android:layout_height="166dp"
         android:id="@+id/etTextBox"
         android:layout_below="@id/tvPhrase"
-        android:background="@drawable/background3"
-        android:inputType="textAutoCorrect" />
+        android:background="@color/White"
+        android:inputType="textMultiLine"
+        android:gravity="left|top"
+        android:lines="8"
+        android:maxLength="140"/>
 
     <LinearLayout
         android:orientation="vertical"
