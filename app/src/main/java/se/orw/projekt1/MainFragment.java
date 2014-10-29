@@ -41,13 +41,14 @@ public class MainFragment extends android.support.v4.app.Fragment {
         tvPhrase = (TextView) view.findViewById(R.id.tvPhrase);
         btnSend = (Button)view.findViewById(R.id.btnSend);
         btnSend.setOnClickListener(new ButtonClickListener());
+        etTextBox.getText().toString();
         return view;
     }
 
     private class ButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
+            controller.publishToSelected(etTextBox.getText().toString(),cbFacebook.isChecked(),cbTwitter.isChecked(),cbGoogle.isChecked());
         }
     }
 }

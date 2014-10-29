@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -118,6 +119,18 @@ public class Controller {
             TwitterController.logOutOfTwitter(activity);
         } else {
             switchToFragment(twitterFragment, null);
+        }
+    }
+
+    public void publishToSelected(String message, boolean cbFacebook, boolean cbTwitter, boolean cbGoogle){
+        if(cbFacebook){
+            publishToFacebook(message);
+        }
+        if(cbTwitter){
+            publishToTwitter(message);
+        }
+        if(cbGoogle){
+//            publishToGoogle();
         }
     }
 
