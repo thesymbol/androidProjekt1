@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 /**
- * The main fragment
+ * The main fragment, where the "magic" is happening!
  *
  * Created by Mattias on 2014-10-28.
  */

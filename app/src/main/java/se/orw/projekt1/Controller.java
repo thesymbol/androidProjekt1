@@ -121,6 +121,15 @@ public class Controller {
         }
     }
 
+    /**
+     * A simple method which collects all the checkboxes then calling the correct method to publish.
+     *
+     * author: Mattias
+     * @param message , The message to publish
+     * @param cbFacebook , Facebook checkbox
+     * @param cbTwitter , Twitter checkbox
+     * @param cbGoogle , Google+ checkbox
+     */
     public void publishToSelected(String message, boolean cbFacebook, boolean cbTwitter, boolean cbGoogle){
         if(cbFacebook){
             publishToFacebook(message);
