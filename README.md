@@ -1,6 +1,6 @@
-Tweetranslate
+Multipost App
 ===============
-Translate your tweet to another language before sending it.
+Post to multiple social networks
 
 Edit Twitter Key/Secret
 -------------------------
