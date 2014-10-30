@@ -26,6 +26,9 @@ public class MainActivity extends FragmentActivity {
         controller.onCreate();
     }
 
+    public Controller getController() {
+        return controller;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

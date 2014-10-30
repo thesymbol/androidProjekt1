@@ -89,8 +89,7 @@ public class Controller {
      * @param tag      The tag for the fragment
      */
     public void switchToFragment(android.support.v4.app.Fragment fragment, String tag) {
-        android.support.v4.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        android.support.v4.app.FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
         if (tag != null && tag.length() > 0) {
             transaction.replace(R.id.activity_main, fragment, tag);
         } else {

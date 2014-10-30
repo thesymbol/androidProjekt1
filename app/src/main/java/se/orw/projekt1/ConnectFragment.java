@@ -55,57 +55,14 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_connect, container, false);
+        if(savedInstanceState != null) {
+            MainActivity activity = (MainActivity) getActivity();
+            controller = activity.getController();
+            controller.switchToConnectFragment();
+        }
         init();
         registerListeners();
         return view;
-    }
-
-    /**
-     * Initialize the fragment
-     * author: Marcus
-     */
-    private void init() {
-        btnTwitterConnect = (Button) view.findViewById(R.id.btnTwitterConnect);
-        LoginButton btnFacebookConnect = (LoginButton) view.findViewById(R.id.btnFacebookConnect);
-        btnFacebookConnect.setFragment(this);
-        btnFacebookConnect.setPublishPermissions(Constants.PERMISSIONS);
-        btnTwitterConnect.setText(controller.updateTwitterButtonText());
-        btnTestFB = (Button) view.findViewById(R.id.btnTestFB);
-        btnGoogleConnect = (SignInButton)view.findViewById(R.id.btnGoogleConnect);
-        btnGoogleDisconnect = (Button)view.findViewById(R.id.btnGoogleDisconnect);
-    }
-
-    /**
-     * Register listeners for buttons
-     * author: Marcus
-     */
-    private void registerListeners() {
-        btnTwitterConnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.twitterConnect();
-                btnTwitterConnect.setText(controller.updateTwitterButtonText());
-            }
-        });
-        btnTestFB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.publishToFacebook("Test from app");
-                controller.publishToTwitter("Test from app");
-            }
-        });
-        btnGoogleConnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                controller.googleClick(1);
-            }
-        });
-        btnGoogleDisconnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                controller.googleClick(2);
-            }
-        });
     }
 
     /**
@@ -191,13 +148,6 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
     }
 
     /**
-     * Handles facebook log in/log outs
-     * @param state The state the Facebook API is in.
-     * */
-    private void onSessionStateChange(SessionState state) {
-        controller.onFacebookStateChange(state);
-    }
-    /**
      * @author Viktor Saltarski
      */
     public void googleSignedIn(){
@@ -210,5 +160,61 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
     public void googleSignedOut(){
         btnGoogleConnect.setVisibility(View.VISIBLE);
         btnGoogleDisconnect.setVisibility(View.GONE);
+    }
+
+    /**
+     * Initialize the fragment
+     * author: Marcus
+     */
+    private void init() {
+        btnTwitterConnect = (Button) view.findViewById(R.id.btnTwitterConnect);
+        LoginButton btnFacebookConnect = (LoginButton) view.findViewById(R.id.btnFacebookConnect);
+        btnFacebookConnect.setFragment(this);
+        btnFacebookConnect.setPublishPermissions(Constants.PERMISSIONS);
+        btnTwitterConnect.setText(controller.updateTwitterButtonText());
+        btnTestFB = (Button) view.findViewById(R.id.btnTestFB);
+        btnGoogleConnect = (SignInButton)view.findViewById(R.id.btnGoogleConnect);
+        btnGoogleDisconnect = (Button)view.findViewById(R.id.btnGoogleDisconnect);
+    }
+
+    /**
+     * Register listeners for buttons
+     * author: Marcus
+     */
+    private void registerListeners() {
+        btnTwitterConnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controller.twitterConnect();
+                btnTwitterConnect.setText(controller.updateTwitterButtonText());
+            }
+        });
+        btnTestFB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controller.publishToFacebook("Test from app");
+                controller.publishToTwitter("Test from app");
+            }
+        });
+        btnGoogleConnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controller.googleClick(1);
+            }
+        });
+        btnGoogleDisconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controller.googleClick(2);
+            }
+        });
+    }
+
+    /**
+     * Handles facebook log in/log outs
+     * @param state The state the Facebook API is in.
+     * */
+    private void onSessionStateChange(SessionState state) {
+        controller.onFacebookStateChange(state);
     }
 }
