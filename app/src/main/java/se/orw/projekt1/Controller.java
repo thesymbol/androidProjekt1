@@ -54,6 +54,7 @@ public class Controller {
     private boolean googleIntentInProgress;
     private boolean googleSignInClicked;
     private ConnectionResult googleConnectionResult;
+    private boolean googleConnected = false;
 
     /**
      * Constructor
@@ -370,7 +371,7 @@ public class Controller {
             Plus.AccountApi.clearDefaultAccount(googleApiClient);
             googleApiClient.disconnect();
             googleApiClient.connect();
-            //updateGoogleButtons(false);
+            updateGoogleButtons(false);
         }
     }
     /**
@@ -386,6 +387,19 @@ public class Controller {
                 googleApiClient.connect();
             }
         }
+    }
+
+    /**
+     * Helpes resolve error when switching between google login and logout buttons
+     * @return
+     */
+    public boolean isGoogleConnected(){
+        if(googleApiClient.isConnected()){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
     /**
@@ -418,13 +432,13 @@ public class Controller {
         public void onConnected(Bundle bundle) {
             googleSignInClicked = false;
             Toast.makeText(activity, "Connected to Google+!", Toast.LENGTH_SHORT).show();
-            //updateGoogleButtons(true);
+            updateGoogleButtons(true);
         }
 
         @Override
         public void onConnectionSuspended(int i) {
             googleApiClient.connect();
-            //updateGoogleButtons(false);
+            updateGoogleButtons(false);
         }
     }
 }

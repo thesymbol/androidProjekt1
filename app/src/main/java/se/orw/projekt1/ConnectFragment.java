@@ -82,6 +82,9 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
         };
         uiHelper = new UiLifecycleHelper(getActivity(), callback);
         uiHelper.onCreate(savedInstanceState);
+        if (controller.isGoogleConnected()){
+            googleSignedIn();
+        }
     }
 
     /**
@@ -99,6 +102,9 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
             onSessionStateChange(session.getState());
         }
         uiHelper.onResume();
+        if (controller.isGoogleConnected()){
+            googleSignedIn();
+        }
     }
 
     /**
@@ -151,15 +157,19 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
      * @author Viktor Saltarski
      */
     public void googleSignedIn(){
-        btnGoogleConnect.setVisibility(View.GONE);
-        btnGoogleDisconnect.setVisibility(View.VISIBLE);
+        if (btnGoogleConnect!=null && btnGoogleDisconnect!=null){
+            btnGoogleConnect.setVisibility(View.GONE);
+            btnGoogleDisconnect.setVisibility(View.VISIBLE);
+        }
     }
     /**
      * @author Viktor Saltarski
      */
     public void googleSignedOut(){
-        btnGoogleConnect.setVisibility(View.VISIBLE);
-        btnGoogleDisconnect.setVisibility(View.GONE);
+        if (btnGoogleConnect!=null && btnGoogleDisconnect!=null) {
+            btnGoogleConnect.setVisibility(View.VISIBLE);
+            btnGoogleDisconnect.setVisibility(View.GONE);
+        }
     }
 
     /**

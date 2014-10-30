@@ -38,7 +38,7 @@
         android:id="@+id/btnGoogleConnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnTwitterConnect"
+        android:layout_below="@+id/btnTestFB"
         android:layout_centerHorizontal="true"/>
 
     <Button
@@ -46,8 +46,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btnGoogleConnect"
+        android:layout_below="@+id/btnTestFB"
         android:text="@string/logoutGoogle"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
 </RelativeLayout>
