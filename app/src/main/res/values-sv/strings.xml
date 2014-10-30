@@ -6,14 +6,16 @@
     <string name="disconnect">Koppla från</string>
     <string name="drawerOpen">Öppna låda</string>
     <string name="drawerClose">Stäng lådar</string>
-    <string name ="Phrase">Vänligen skriv in den önskade frasen du vill publicera.</string>
-    <string name ="FaceBook">Facebook</string>
-    <string name ="Twitter">Twitter</string>
+    <string name="Phrase">Vänligen skriv in den önskade frasen du vill publicera.</string>
+    <string name="FaceBook">Facebook</string>
+    <string name="Twitter">Twitter</string>
     <string name="Google">Google+</string>
     <string name="Send">Skicka</string>
-    <string name ="Translate">Översätt</string>
+    <string name="Translate">Översätt</string>
     <string name="loginWithTwitter">Logga in med Twitter</string>
-    <string name="logoutTwitter">Logga ut</string>
+    <string name="logout">Logga ut</string>
     <string name="menuHome">Hem</string>
     <string name="menuConnect">Anslut</string>
+    <string name="publishedToTwitter">Publicerat till twitter</string>
+    <string name="publishedToFacebook">Publicerat till facebook</string>
 </resources>

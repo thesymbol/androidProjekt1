@@ -14,7 +14,7 @@
 
     <Button
         android:background="@drawable/layers_twitter_button_bg"
-        style="@style/twitterButton"
+        style="@style/connectButton"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingRight="10dp"
@@ -26,19 +26,11 @@
         android:layout_centerHorizontal="true"
         android:text="@string/loginWithTwitter"/>
 
-    <Button
-        android:id="@+id/btnTestFB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Test Post"
-        android:layout_below="@id/btnTwitterConnect"
-        android:layout_centerHorizontal="true"/>
-
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btnGoogleConnect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnTestFB"
+        android:layout_below="@+id/btnTwitterConnect"
         android:layout_centerHorizontal="true"/>
 
     <Button
@@ -46,8 +38,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btnTestFB"
-        android:text="@string/logoutGoogle"
+        android:layout_below="@+id/btnTwitterConnect"
+        android:text="@string/logout"
+        android:background="@drawable/btn_gplus_normal"
+        android:gravity="right|center_vertical"
+        android:textSize="14sp"
+        android:paddingRight="8dp"
+        android:textColor="@color/White"
         android:visibility="gone"/>
 
 </RelativeLayout>

@@ -25,7 +25,6 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
     private Controller controller;
     private UiLifecycleHelper uiHelper;
     private Button btnTwitterConnect;
-    private Button btnTestFB;
     private SignInButton btnGoogleConnect;
     private Button btnGoogleDisconnect;
 
@@ -60,6 +59,9 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
             controller = activity.getController();
             controller.switchToConnectFragment();
         }
+        if (controller.isGoogleConnected()){
+            googleSignedIn();
+        }
         init();
         registerListeners();
         return view;
@@ -82,9 +84,6 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
         };
         uiHelper = new UiLifecycleHelper(getActivity(), callback);
         uiHelper.onCreate(savedInstanceState);
-        if (controller.isGoogleConnected()){
-            googleSignedIn();
-        }
     }
 
     /**
@@ -182,7 +181,6 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
         btnFacebookConnect.setFragment(this);
         btnFacebookConnect.setPublishPermissions(Constants.PERMISSIONS);
         btnTwitterConnect.setText(controller.updateTwitterButtonText());
-        btnTestFB = (Button) view.findViewById(R.id.btnTestFB);
         btnGoogleConnect = (SignInButton)view.findViewById(R.id.btnGoogleConnect);
         btnGoogleDisconnect = (Button)view.findViewById(R.id.btnGoogleDisconnect);
     }
@@ -197,13 +195,6 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
             public void onClick(View view) {
                 controller.twitterConnect();
                 btnTwitterConnect.setText(controller.updateTwitterButtonText());
-            }
-        });
-        btnTestFB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.publishToFacebook("Test from app");
-                controller.publishToTwitter("Test from app");
             }
         });
         btnGoogleConnect.setOnClickListener(new View.OnClickListener() {

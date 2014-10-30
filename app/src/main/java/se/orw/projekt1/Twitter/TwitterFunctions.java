@@ -32,7 +32,7 @@ public class TwitterFunctions {
      */
     public static void postToTwitter(Context c, final Activity callingActivity, final String consumerKey, final String consumerSecret, final String message, final TwitterPostResponse postResponse) {
         if (!TwitterController.isConnected(c)) {
-            postResponse.OnResult(false);
+            postResponse.onResult(false);
             return;
         }
 
@@ -60,7 +60,7 @@ public class TwitterFunctions {
                 callingActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        postResponse.OnResult(finalSuccess);
+                        postResponse.onResult(finalSuccess);
                     }
                 });
 
@@ -74,6 +74,6 @@ public class TwitterFunctions {
      * @author Marcus
      */
     public static abstract class TwitterPostResponse {
-        public abstract void OnResult(Boolean success);
+        public abstract void onResult(Boolean success);
     }
 }

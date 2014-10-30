@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.facebook.AppEventsLogger;
-import com.facebook.Session;
 
 /**
  * The main activity for the app
@@ -74,9 +73,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     /**
-     * Gets rid of: "Warning: Sessionless Request needs token but missing either application ID or client token."
-     * When facebook API starts
-     * @author Marcus
+     * @author Viktor Saltarski
      *
      * @param requestCode -
      * @param resultCode -
@@ -85,7 +82,6 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
         controller.onActivityResult(requestCode, resultCode);
     }
 

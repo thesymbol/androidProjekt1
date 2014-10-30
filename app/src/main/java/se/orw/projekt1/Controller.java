@@ -1,5 +1,6 @@
 package se.orw.projekt1;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
@@ -54,7 +55,6 @@ public class Controller {
     private boolean googleIntentInProgress;
     private boolean googleSignInClicked;
     private ConnectionResult googleConnectionResult;
-    private boolean googleConnected = false;
 
     /**
      * Constructor
@@ -114,7 +114,7 @@ public class Controller {
      */
     public int updateTwitterButtonText() {
         if (TwitterController.isConnected(activity)) {
-            return R.string.logoutTwitter;
+            return R.string.logout;
         }
         return R.string.loginWithTwitter;
     }
@@ -160,8 +160,8 @@ public class Controller {
         //send test tweet
         TwitterFunctions.postToTwitter(activity, activity, Secrets.TWITTER_CONSUMER_KEY, Secrets.TWITTER_CONSUMER_SECRET, message, new TwitterFunctions.TwitterPostResponse() {
             @Override
-            public void OnResult(Boolean success) {
-                Log.d(Constants.TWITTER_TAG, "Success: " + success);
+            public void onResult(Boolean success) {
+                Toast.makeText(activity, R.string.publishedToTwitter, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -197,7 +197,7 @@ public class Controller {
                     if (error != null) {
                         Toast.makeText(activity, error.getErrorMessage(), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(activity, "Published to facebook", Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity, R.string.publishedToFacebook, Toast.LENGTH_LONG).show();
                     }
                 }
             };
@@ -334,7 +334,7 @@ public class Controller {
      */
     public void onActivityResult(int requestCode, int responseCode){
         if (requestCode == RC_SIGN_IN){
-            if (responseCode != activity.RESULT_OK){
+            if (responseCode != Activity.RESULT_OK){
                 googleSignInClicked = false;
             }
             googleIntentInProgress = false;
@@ -391,15 +391,10 @@ public class Controller {
 
     /**
      * Helpes resolve error when switching between google login and logout buttons
-     * @return
+     * @return -
      */
     public boolean isGoogleConnected(){
-        if(googleApiClient.isConnected()){
-            return true;
-        }else{
-            return false;
-        }
-
+        return googleApiClient.isConnected();
     }
 
     /**
