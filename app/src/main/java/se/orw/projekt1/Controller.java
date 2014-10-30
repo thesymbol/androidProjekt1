@@ -205,8 +205,6 @@ public class Controller {
                     FacebookRequestError error = response.getError();
                     if (error != null) {
                         Toast.makeText(activity, error.getErrorMessage(), Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(activity, postId, Toast.LENGTH_SHORT).show();
                     }
                 }
             };
