@@ -34,4 +34,20 @@
         android:layout_below="@id/btnTwitterConnect"
         android:layout_centerHorizontal="true"/>
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btnGoogleConnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnTwitterConnect"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/btnGoogleDisconnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btnGoogleConnect"
+        android:text="@string/logoutGoogle"
+        android:visibility="visible"/>
+
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package se.orw.projekt1;
 
+import android.content.Intent;
+import android.content.IntentSender;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
@@ -19,6 +21,11 @@ import com.facebook.RequestAsyncTask;
 import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.PlusShare;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,6 +51,12 @@ public class Controller {
     private ActionBarDrawerToggle drawerToggle;
     private DrawerLayout drawerLayout;
     private String[] menu;
+    //Googlevariabler
+    private static final int RC_SIGN_IN = 0;
+    private GoogleApiClient googleApiClient;
+    private boolean googleIntentInProgress;
+    private boolean googleSignInClicked;
+    private ConnectionResult googleConnectionResult;
 
     /**
      * Constructor
@@ -138,7 +151,7 @@ public class Controller {
             publishToTwitter(message);
         }
         if(cbGoogle){
-//            publishToGoogle();
+            publishToGPlus(message);
         }
     }
 
@@ -279,6 +292,150 @@ public class Controller {
         if (activity.getActionBar() != null) {
             activity.getActionBar().setDisplayHomeAsUpEnabled(true);
             activity.getActionBar().setHomeButtonEnabled(true);
+        }
+    }
+    /**
+     * @author Viktor Saltarski
+     */
+    public void onCreate(){
+        googleApiClient = new GoogleApiClient.Builder(activity)
+                .addConnectionCallbacks(new GoogleCallbacks())
+                .addOnConnectionFailedListener(new ConnectionListener())
+                .addApi(Plus.API)
+                .addScope(Plus.SCOPE_PLUS_LOGIN).build();
+    }
+    /**
+     * @author Viktor Saltarski
+     */
+    public void onStart(){
+        googleApiClient.connect();
+    }
+    /**
+     * @author Viktor Saltarski
+     */
+    public void onStop(){
+        if (googleApiClient.isConnected()){
+            googleApiClient.disconnect();
+        }
+    }
+    /**
+     * @author Viktor Saltarski
+     */
+    public void googleClick(int choice){
+        if(choice==1){
+            signInWithGPlus();
+        }
+        if(choice==2){
+            signOutFromGPlus();
+        }
+    }
+    /**
+     * @author Viktor Saltarski
+     */
+    public void publishToGPlus(String message){
+        Intent shareIntent = new PlusShare.Builder(activity)
+                .setType("text/plain")
+                .setText(message)
+                .getIntent();
+        activity.startActivityForResult(shareIntent,0);
+    }
+    /**
+     * @author Viktor Saltarski
+     */
+    public void onActivityResult(int requestCode, int responseCode){
+        if (requestCode == RC_SIGN_IN){
+            if (responseCode != activity.RESULT_OK){
+                googleSignInClicked = false;
+            }
+            googleIntentInProgress = false;
+            if (!googleApiClient.isConnecting()){
+                googleApiClient.connect();
+            }
+        }
+    }
+    /**
+     * @author Viktor Saltarski
+     */
+    //workinprogress
+    public void updateGoogleButtons(boolean signedIn){
+        if(signedIn){
+            connectFragment.googleSignedIn();
+        }else{
+            connectFragment.googleSignedOut();
+        }
+    }
+    /**
+     * @author Viktor Saltarski
+     */
+    public void signInWithGPlus(){
+        if(!googleApiClient.isConnecting()){
+            googleSignInClicked = true;
+            resolveSignInError();
+        }
+    }
+    /**
+     * @author Viktor Saltarski
+     */
+    public void signOutFromGPlus(){
+        if(googleApiClient.isConnected()){
+            Plus.AccountApi.clearDefaultAccount(googleApiClient);
+            googleApiClient.disconnect();
+            googleApiClient.connect();
+            //updateGoogleButtons(false);
+        }
+    }
+    /**
+     * @author Viktor Saltarski
+     */
+    public void resolveSignInError(){
+        if(googleConnectionResult.hasResolution()){
+            try {
+                googleIntentInProgress = true;
+                googleConnectionResult.startResolutionForResult(activity, RC_SIGN_IN);
+            }catch (IntentSender.SendIntentException e){
+                googleIntentInProgress = false;
+                googleApiClient.connect();
+            }
+        }
+    }
+
+    /**
+     * @author Viktor Saltarski
+     */
+    private class ConnectionListener implements GoogleApiClient.OnConnectionFailedListener {
+
+        @Override
+        public void onConnectionFailed(ConnectionResult connectionResult) {
+            if(!connectionResult.hasResolution()){
+                GooglePlayServicesUtil.getErrorDialog(connectionResult.getErrorCode(), activity, 0).show();
+                return;
+            }
+
+            if (!googleIntentInProgress){
+                googleConnectionResult = connectionResult;
+                if (googleSignInClicked){
+                    //trying to resolve errors as user has clicked sign in
+                    resolveSignInError();
+                }
+            }
+        }
+    }
+    /**
+     * @author Viktor Saltarski
+     */
+    private class GoogleCallbacks implements GoogleApiClient.ConnectionCallbacks {
+
+        @Override
+        public void onConnected(Bundle bundle) {
+            googleSignInClicked = false;
+            Toast.makeText(activity, "Connected to Google+!", Toast.LENGTH_SHORT).show();
+            //updateGoogleButtons(true);
+        }
+
+        @Override
+        public void onConnectionSuspended(int i) {
+            googleApiClient.connect();
+            //updateGoogleButtons(false);
         }
     }
 }

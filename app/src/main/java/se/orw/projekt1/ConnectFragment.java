@@ -12,6 +12,7 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.widget.LoginButton;
+import com.google.android.gms.common.SignInButton;
 
 
 /**
@@ -25,7 +26,8 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
     private UiLifecycleHelper uiHelper;
     private Button btnTwitterConnect;
     private Button btnTestFB;
-    //private Button btnGoogleConnect;
+    private SignInButton btnGoogleConnect;
+    private Button btnGoogleDisconnect;
 
     public ConnectFragment() {
         // Required empty public constructor
@@ -69,6 +71,8 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
         btnFacebookConnect.setPublishPermissions(Constants.PERMISSIONS);
         btnTwitterConnect.setText(controller.updateTwitterButtonText());
         btnTestFB = (Button) view.findViewById(R.id.btnTestFB);
+        btnGoogleConnect = (SignInButton)view.findViewById(R.id.btnGoogleConnect);
+        btnGoogleDisconnect = (Button)view.findViewById(R.id.btnGoogleDisconnect);
     }
 
     /**
@@ -88,6 +92,18 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
             public void onClick(View view) {
                 controller.publishToFacebook("Test from app");
                 controller.publishToTwitter("Test from app");
+            }
+        });
+        btnGoogleConnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controller.googleClick(1);
+            }
+        });
+        btnGoogleDisconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controller.googleClick(2);
             }
         });
     }
@@ -180,5 +196,19 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
      * */
     private void onSessionStateChange(SessionState state) {
         controller.onFacebookStateChange(state);
+    }
+    /**
+     * @author Viktor Saltarski
+     */
+    public void googleSignedIn(){
+        btnGoogleConnect.setVisibility(View.GONE);
+        btnGoogleDisconnect.setVisibility(View.VISIBLE);
+    }
+    /**
+     * @author Viktor Saltarski
+     */
+    public void googleSignedOut(){
+        btnGoogleConnect.setVisibility(View.VISIBLE);
+        btnGoogleDisconnect.setVisibility(View.GONE);
     }
 }

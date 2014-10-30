@@ -18,4 +18,5 @@
     <string name="logoutTwitter">Log out</string>
     <string name="menuHome">Home</string>
     <string name="menuConnect">Connect</string>
+    <string name="logoutGoogle">Log out from Google+</string>
 </resources>

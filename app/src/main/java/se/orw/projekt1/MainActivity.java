@@ -23,6 +23,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         controller = new Controller(this);
+        controller.onCreate();
     }
 
 
@@ -82,5 +83,18 @@ public class MainActivity extends FragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
+        controller.onActivityResult(requestCode, resultCode);
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        controller.onStart();
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        controller.onStop();
     }
 }
