@@ -35,7 +35,7 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
 
     /**
      * Sets the controller
-     * author: Marcus
+     * @author Marcus
      *
      * @param controller The controller
      */
@@ -45,7 +45,7 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
 
     /**
      * The fragment's initial view
-     * author: Marcus
+     * @author Marcus
      *
      * @param inflater -
      * @param container -
@@ -67,7 +67,7 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
 
     /**
      * The onCreate method of the Fragment Overridden for facebook API.
-     * author: Marcus
+     * @author Marcus
      *
      * @param savedInstanceState -
      */
@@ -86,7 +86,7 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
 
     /**
      * Facebook onResume Override
-     * author: Marcus
+     * @author Marcus
      */
     @Override
     public void onResume() {
@@ -103,7 +103,7 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
 
     /**
      * Facebook onActivityResult Override
-     * author: Marcus
+     * @author Marcus
      *
      * @param requestCode -
      * @param resultCode -
@@ -117,7 +117,7 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
 
     /**
      * Facebook onPause Override
-     * author: Marcus
+     * @author Marcus
      */
     @Override
     public void onPause() {
@@ -127,7 +127,7 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
 
     /**
      * Facebook onDestroy Override
-     * author: Marcus
+     * @author Marcus
      */
     @Override
     public void onDestroy() {
@@ -137,7 +137,7 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
 
     /**
      * Facebook onSaveInstanceState Override
-     * author: Marcus
+     * @author Marcus
      *
      * @param outState -
      */
@@ -164,7 +164,7 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
 
     /**
      * Initialize the fragment
-     * author: Marcus
+     * @author Marcus
      */
     private void init() {
         btnTwitterConnect = (Button) view.findViewById(R.id.btnTwitterConnect);
@@ -179,7 +179,7 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
 
     /**
      * Register listeners for buttons
-     * author: Marcus
+     * @author Marcus
      */
     private void registerListeners() {
         btnTwitterConnect.setOnClickListener(new View.OnClickListener() {
@@ -212,6 +212,8 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
 
     /**
      * Handles facebook log in/log outs
+     * @author Marcus
+     *
      * @param state The state the Facebook API is in.
      * */
     private void onSessionStateChange(SessionState state) {

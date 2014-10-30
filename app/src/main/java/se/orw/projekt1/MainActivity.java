@@ -76,7 +76,7 @@ public class MainActivity extends FragmentActivity {
     /**
      * Gets rid of: "Warning: Sessionless Request needs token but missing either application ID or client token."
      * When facebook API starts
-     * author: Marcus
+     * @author Marcus
      *
      * @param requestCode -
      * @param resultCode -

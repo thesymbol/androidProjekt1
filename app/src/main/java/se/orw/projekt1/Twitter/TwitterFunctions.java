@@ -21,7 +21,7 @@ public class TwitterFunctions {
 
     /**
      * Sends a tweet to twitter
-     * author: Marcus
+     * @author Marcus
      *
      * @param c -
      * @param callingActivity -
@@ -71,7 +71,7 @@ public class TwitterFunctions {
     /**
      * What to happen when the response is received
      * Must be implemented.
-     * author: Marcus
+     * @author Marcus
      */
     public static abstract class TwitterPostResponse {
         public abstract void OnResult(Boolean success);

@@ -24,7 +24,7 @@ public class TwitterFragment extends android.support.v4.app.Fragment {
 
     /**
      * Sets the controller
-     * author: Marcus
+     * @author Marcus
      *
      * @param controller The controller
      */
@@ -34,7 +34,7 @@ public class TwitterFragment extends android.support.v4.app.Fragment {
 
     /**
      * The fragment's initial view
-     * author: Marcus
+     * @author Marcus
      *
      * @param inflater           -
      * @param container          -
@@ -50,7 +50,7 @@ public class TwitterFragment extends android.support.v4.app.Fragment {
 
     /**
      * Called once the login is completed/failed
-     * author: Marcus
+     * @author Marcus
      */
     @Override
     public void onDestroy() {

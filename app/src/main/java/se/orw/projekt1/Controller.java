@@ -60,7 +60,7 @@ public class Controller {
 
     /**
      * Constructor
-     * author: Marcus
+     * @author Marcus
      *
      * @param activity The FragmentActivity of the app
      */
@@ -83,7 +83,7 @@ public class Controller {
 
     /**
      * Switch to specified fragment
-     * author: Marcus
+     * @author Marcus
      *
      * @param fragment The fragment to switch to
      * @param tag      The tag for the fragment
@@ -100,7 +100,7 @@ public class Controller {
 
     /**
      * Switch back to the default fragment
-     * author: Marcus
+     * @author Marcus
      */
     public void switchToConnectFragment() {
         switchToFragment(connectFragment, null);
@@ -110,7 +110,7 @@ public class Controller {
 
     /**
      * Updates the text on the twitter button.
-     * author: Marcus
+     * @author Marcus
      *
      * @return Id of the strings text.
      */
@@ -123,7 +123,7 @@ public class Controller {
 
     /**
      * Connect to twitter
-     * author: Marcus
+     * @author Marcus
      */
     public void twitterConnect() {
         if (TwitterController.isConnected(activity)) {
@@ -136,7 +136,7 @@ public class Controller {
     /**
      * A simple method which collects all the checkboxes then calling the correct method to publish.
      *
-     * author: Mattias
+     * @author Mattias
      * @param message , The message to publish
      * @param cbFacebook , Facebook checkbox
      * @param cbTwitter , Twitter checkbox
@@ -156,7 +156,7 @@ public class Controller {
 
     /**
      * Send test message to twitter
-     * author: Marcus
+     * @author Marcus
      */
     public void publishToTwitter(String message) {
         //send test tweet
@@ -173,7 +173,7 @@ public class Controller {
     /**
      * Publish story to facebook
      * will need publish_access permission
-     * author: Marcus
+     * @author Marcus
      *
      * @param message The message to publish
      */
@@ -220,7 +220,7 @@ public class Controller {
 
     /**
      * Handle what will happen if facebook is logged in or out
-     * author: Marcus
+     * @author Marcus
      *
      * @param state The session state (logged in or out).
      */
@@ -236,7 +236,7 @@ public class Controller {
 
     /**
      * Get the drawerToggle (to be used in Activity)
-     * author: Marcus
+     * @author Marcus
      *
      * @return drawerToggle
      */
@@ -248,7 +248,7 @@ public class Controller {
 
     /**
      * Compare two collections if they are the same return true
-     * author: Marcus
+     * @author Marcus
      *
      * @param subset   The set you want to find in the superset
      * @param superset The set to search in
@@ -265,7 +265,7 @@ public class Controller {
 
     /**
      * Initialize the navigation drawer
-     * author: Marcus
+     * @author Marcus
      */
     private void initNavigationDrawer() {
         Log.d(Constants.TAG, "Init navigation drawer");

@@ -41,7 +41,7 @@ public class TwitterController {
 
     /**
      * Constructor to handle the Twitter Login
-     * author: Marcus
+     * @author Marcus
      *
      * @param fragmentView -
      * @param fragment     -
@@ -101,7 +101,7 @@ public class TwitterController {
 
     /**
      * Destroy the dialog once we are done
-     * author: Marcus
+     * @author Marcus
      */
     public void onDestroy() {
         if (mProgressDialog != null) {
@@ -112,7 +112,7 @@ public class TwitterController {
     //Helper methods
     /**
      * Check if we are connected to twitter
-     * author: Marcus
+     * @author Marcus
      *
      * @param context The context
      * @return true if we are connected to twitter else false
@@ -124,7 +124,7 @@ public class TwitterController {
 
     /**
      * Logout of twitter
-     * author: Marcus
+     * @author Marcus
      *
      * @param context The context
      */
@@ -138,7 +138,7 @@ public class TwitterController {
 
     /**
      * Get the Access Token
-     * author: Marcus
+     * @author Marcus
      *
      * @param context The context
      * @return The access token
@@ -150,7 +150,7 @@ public class TwitterController {
 
     /**
      * Get the Secret Access Token
-     * author: Marcus
+     * @author Marcus
      *
      * @param context The context
      * @return The access token secret
@@ -162,7 +162,7 @@ public class TwitterController {
 
     /**
      * Save the token received from the user
-     * author: Marcus
+     * @author Marcus
      *
      * @param uri The uri to use
      */
@@ -193,7 +193,7 @@ public class TwitterController {
 
     /**
      * Getting the OAuth key's etc
-     * author: Marcus
+     * @author Marcus
      */
     private void askOAuth() {
         ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
