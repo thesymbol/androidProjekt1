@@ -27,9 +27,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.PlusShare;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Collection;
 import java.util.List;
 
@@ -195,16 +192,11 @@ public class Controller {
             Request.Callback callback = new Request.Callback() {
                 @Override
                 public void onCompleted(Response response) {
-                    JSONObject graphResponse = response.getGraphObject().getInnerJSONObject();
-                    String postId = null;
-                    try {
-                        postId = graphResponse.getString("id");
-                    } catch (JSONException e) {
-                        Log.i(Constants.FB_TAG, "JSON error " + e.getMessage());
-                    }
                     FacebookRequestError error = response.getError();
                     if (error != null) {
                         Toast.makeText(activity, error.getErrorMessage(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(activity, "Published to facebook", Toast.LENGTH_LONG).show();
                     }
                 }
             };
