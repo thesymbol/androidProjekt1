@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="se.orw.projekt1.ConnectFragment"
-    android:background="@drawable/nice_pic">
+    android:background="@drawable/bkg10">
 
     <com.facebook.widget.LoginButton
         android:id="@+id/btnFacebookConnect"
