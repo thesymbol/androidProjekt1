@@ -21,7 +21,7 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        controller = new Controller(this);
+        controller = new Controller(this, savedInstanceState);
         controller.onCreate();
     }
 
@@ -95,5 +95,11 @@ public class MainActivity extends FragmentActivity {
     protected void onStop(){
         super.onStop();
         controller.onStop();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        controller.onSaveInstanceState(outState);
     }
 }

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
 /**
  * The main fragment, where the "magic" is happening!
@@ -18,9 +17,9 @@ import android.widget.TextView;
 public class MainFragment extends android.support.v4.app.Fragment {
     private CheckBox cbFacebook, cbTwitter, cbGoogle;
     private EditText etTextBox;
-    private TextView tvPhrase;
     private Button btnSend;
     private Controller controller;
+    private String message = "";
 
     public MainFragment() {
         // Required empty public constructor
@@ -28,6 +27,14 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
     public void setController(Controller controller) {
         this.controller = controller;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getEtText() {
+        return etTextBox.getText().toString();
     }
 
     @Override
@@ -38,8 +45,8 @@ public class MainFragment extends android.support.v4.app.Fragment {
         cbTwitter = (CheckBox) view.findViewById(R.id.cbTwitter);
         cbGoogle = (CheckBox) view.findViewById(R.id.cbGoogle);
         etTextBox = (EditText) view.findViewById(R.id.etTextBox);
-        tvPhrase = (TextView) view.findViewById(R.id.tvPhrase);
         btnSend = (Button)view.findViewById(R.id.btnSend);
+        etTextBox.setText(message);
         btnSend.setOnClickListener(new ButtonClickListener());
         return view;
     }

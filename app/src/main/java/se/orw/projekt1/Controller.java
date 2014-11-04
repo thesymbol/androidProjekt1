@@ -62,12 +62,15 @@ public class Controller {
      *
      * @param activity The FragmentActivity of the app
      */
-    public Controller(FragmentActivity activity) {
+    public Controller(FragmentActivity activity, Bundle savedInstanceState) {
         this.activity = activity;
         menu = new String[]{activity.getResources().getString(R.string.menuHome), activity.getResources().getString(R.string.menuConnect)};
 
         mainFragment = new MainFragment();
         mainFragment.setController(this);
+        if(savedInstanceState != null) {
+            mainFragment.setMessage(savedInstanceState.getString("MainFragmentMessage"));
+        }
 
         connectFragment = new ConnectFragment();
         connectFragment.setController(this);
@@ -77,6 +80,10 @@ public class Controller {
 
         switchToFragment(mainFragment, null);
         initNavigationDrawer();
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString("MainFragmentMessage", mainFragment.getEtText());
     }
 
     /**

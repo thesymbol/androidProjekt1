@@ -1,4 +1,4 @@
-<RelativeLayout
+<LinearLayout
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -19,7 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="166dp"
         android:id="@+id/etTextBox"
-        android:layout_below="@id/tvPhrase"
         android:background="@color/White"
         android:inputType="textMultiLine"
         android:gravity="left|top"
@@ -33,8 +32,7 @@
         android:background="@drawable/linearlayout_bg"
         android:padding="10dp"
         android:id="@+id/submitBox"
-        android:layout_below="@+id/etTextBox"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="65dp">
 
         <CheckBox
@@ -65,4 +63,4 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/Send" />
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
