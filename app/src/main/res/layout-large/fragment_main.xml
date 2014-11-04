@@ -1,0 +1,74 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bkg7"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/Phrase"
+        android:id="@+id/tvPhrase"
+        android:background="@drawable/bkg7"
+        android:textColor="@color/AntiqueWhite"
+        android:textSize="20sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:id="@+id/etTextBox"
+        android:background="@color/White"
+        android:inputType="textMultiLine"
+        android:gravity="left|top"
+        android:lines="8"
+        android:maxLength="140"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/linearlayout_bg"
+            android:padding="10dp"
+            android:id="@+id/submitBox"
+            android:layout_marginTop="15dp">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/FaceBook"
+                android:id="@+id/cbFacebook"
+                android:layout_gravity="center_horizontal"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Twitter"
+                android:id="@+id/cbTwitter"
+                android:layout_gravity="center_horizontal" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Google"
+                android:id="@+id/cbGoogle"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/submitBox"
+            android:layout_centerVertical="true"
+            android:paddingLeft="35dp"
+            android:paddingRight="35dp"
+            android:id="@+id/btnSend"
+            android:text="@string/Send"/>
+    </RelativeLayout>
+
+</LinearLayout>
