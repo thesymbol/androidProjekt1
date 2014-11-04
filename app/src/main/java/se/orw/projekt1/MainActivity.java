@@ -92,18 +92,32 @@ public class MainActivity extends FragmentActivity {
         controller.onActivityResult(requestCode, resultCode);
     }
 
+    /**
+     * Called once the app is starting.
+     * @author Marcus
+     */
     @Override
     protected void onStart(){
         super.onStart();
         controller.onStart();
     }
 
+    /**
+     * Called once the app is stopping
+     * @author Marcus
+     */
     @Override
     protected void onStop(){
         super.onStop();
         controller.onStop();
     }
 
+    /**
+     * Called once the app is going to save the state that its in
+     * @author Marcus
+     *
+     * @param outState The state to save
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

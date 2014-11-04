@@ -82,6 +82,12 @@ public class Controller {
         initNavigationDrawer();
     }
 
+    /**
+     * Called once the fragment is going to shutdown to save the state
+     * @author Marcus
+     *
+     * @param outState The state we are saving
+     */
     public void onSaveInstanceState(Bundle outState) {
         outState.putString("MainFragmentMessage", mainFragment.getEtText());
     }

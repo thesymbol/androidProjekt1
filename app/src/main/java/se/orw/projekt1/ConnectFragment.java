@@ -190,25 +190,9 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
      * @author Marcus
      */
     private void registerListeners() {
-        btnTwitterConnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                controller.twitterConnect();
-                btnTwitterConnect.setText(controller.updateTwitterButtonText());
-            }
-        });
-        btnGoogleConnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                controller.googleClick(1);
-            }
-        });
-        btnGoogleDisconnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                controller.googleClick(2);
-            }
-        });
+        btnTwitterConnect.setOnClickListener(new TwitterClickListener());
+        btnGoogleConnect.setOnClickListener(new GoogleConnectClickListener());
+        btnGoogleDisconnect.setOnClickListener(new GoogleDisconnectClickListener());
     }
 
     /**
@@ -220,4 +204,39 @@ public class ConnectFragment extends android.support.v4.app.Fragment {
     private void onSessionStateChange(SessionState state) {
         controller.onFacebookStateChange(state);
     }
+
+    /**
+     * Handles Twitter button presses
+     * @author Marcus
+     */
+    private class TwitterClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            controller.twitterConnect();
+            btnTwitterConnect.setText(controller.updateTwitterButtonText());
+        }
+    }
+
+    /**
+     * Handles Google button presses on connect
+     * @author Viktor Saltarski
+     */
+    private class GoogleConnectClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            controller.googleClick(1);
+        }
+    }
+
+    /**
+     * Handles Google button presses on disconnect
+     * @author Viktor Saltarski
+     */
+    private class GoogleDisconnectClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            controller.googleClick(2);
+        }
+    }
+
 }

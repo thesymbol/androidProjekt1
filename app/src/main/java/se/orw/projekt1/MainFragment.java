@@ -25,18 +25,45 @@ public class MainFragment extends android.support.v4.app.Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * Sets the controller for the fragment
+     * @author Mattias
+     *
+     * @param controller The controller
+     */
     public void setController(Controller controller) {
         this.controller = controller;
     }
 
+    /**
+     * Sets the message of the editText
+     * @author Mattias
+     *
+     * @param message The message to set
+     */
     public void setMessage(String message) {
         this.message = message;
     }
 
+    /**
+     * Gets the text in the editText
+     * @author Mattias
+     *
+     * @return The text
+     */
     public String getEtText() {
         return etTextBox.getText().toString();
     }
 
+    /**
+     * Creates the actual visible fragment
+     * @author Mattias
+     *
+     * @param inflater -
+     * @param container -
+     * @param savedInstanceState -
+     * @return The view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -51,6 +78,10 @@ public class MainFragment extends android.support.v4.app.Fragment {
         return view;
     }
 
+    /**
+     * Handles button presses
+     * @author Mattias
+     */
     private class ButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
