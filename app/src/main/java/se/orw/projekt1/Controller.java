@@ -145,10 +145,20 @@ public class Controller {
             publishToFacebook(message);
         }
         if(cbTwitter){
-            publishToTwitter(message);
+            if (!TwitterController.isConnected(activity)){
+                Toast.makeText(activity,"Log in to Twitter first", Toast.LENGTH_SHORT).show();
+            }else{
+                publishToTwitter(message);
+            }
+
         }
         if(cbGoogle){
-            publishToGPlus(message);
+            if (!isGoogleConnected()){
+                Toast.makeText(activity,"Log in to G+ first", Toast.LENGTH_SHORT).show();
+            }else {
+                publishToGPlus(message);
+            }
+
         }
     }
 
