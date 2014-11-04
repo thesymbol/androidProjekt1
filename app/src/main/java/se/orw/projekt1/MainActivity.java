@@ -39,21 +39,28 @@ public class MainActivity extends FragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handles the drawer on the left sides button
-        return controller.getDrawerToggle().onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+        if(controller.getDrawerToggle() != null) {
+            return controller.getDrawerToggle().onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // used to sync the drawer toggle state (opened/closed)
-        controller.getDrawerToggle().syncState();
+        if(controller.getDrawerToggle() != null) {
+            controller.getDrawerToggle().syncState();
+        }
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         // Once the app changes configuration (eg rotation).
-        controller.getDrawerToggle().onConfigurationChanged(newConfig);
+        if(controller.getDrawerToggle() != null) {
+            controller.getDrawerToggle().onConfigurationChanged(newConfig);
+        }
     }
 
     @Override

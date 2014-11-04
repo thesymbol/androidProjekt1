@@ -277,28 +277,36 @@ public class Controller {
      */
     private void initNavigationDrawer() {
         Log.d(Constants.TAG, "Init navigation drawer");
-        drawerLayout = (DrawerLayout) activity.findViewById(R.id.layout_drawer);
         ListView drawerList = (ListView) activity.findViewById(R.id.left_drawer);
-        drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        final boolean isTablet = activity.getResources().getBoolean(R.bool.isTablet);
 
-        drawerList.setAdapter(new ArrayAdapter<String>(activity, R.layout.drawer_list_item, menu));
-        drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                if (menu[position].equals(activity.getResources().getString(R.string.menuConnect))) {
-                    switchToFragment(connectFragment, null);
-                } else if (menu[position].equals(activity.getResources().getString(R.string.menuHome))) {
-                    switchToFragment(mainFragment, null);
+        if(!isTablet) {
+            drawerLayout = (DrawerLayout) activity.findViewById(R.id.layout_drawer);
+            drawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        }
+        if(drawerList != null) {
+            drawerList.setAdapter(new ArrayAdapter<String>(activity, R.layout.drawer_list_item, menu));
+            drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    if (menu[position].equals(activity.getResources().getString(R.string.menuConnect))) {
+                        switchToFragment(connectFragment, null);
+                    } else if (menu[position].equals(activity.getResources().getString(R.string.menuHome))) {
+                        switchToFragment(mainFragment, null);
+                    }
+                    if (!isTablet) {
+                        drawerLayout.closeDrawers();
+                    }
                 }
-
-                drawerLayout.closeDrawers();
+            });
+            if (!isTablet) {
+                drawerToggle = new ActionBarDrawerToggle(activity, drawerLayout, R.drawable.ic_drawer, R.string.drawerOpen, R.string.drawerClose);
+                drawerLayout.setDrawerListener(drawerToggle);
+                if (activity.getActionBar() != null) {
+                    activity.getActionBar().setDisplayHomeAsUpEnabled(true);
+                    activity.getActionBar().setHomeButtonEnabled(true);
+                }
             }
-        });
-        drawerToggle = new ActionBarDrawerToggle(activity, drawerLayout, R.drawable.ic_drawer, R.string.drawerOpen, R.string.drawerClose);
-        drawerLayout.setDrawerListener(drawerToggle);
-        if (activity.getActionBar() != null) {
-            activity.getActionBar().setDisplayHomeAsUpEnabled(true);
-            activity.getActionBar().setHomeButtonEnabled(true);
         }
     }
     /**
